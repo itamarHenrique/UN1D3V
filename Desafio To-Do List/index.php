@@ -11,7 +11,7 @@
 
 <nav class="navbar" style="background-color: #0B7BFF">
 
-<a class="navbar-brand" href="">ToDo list</a>
+<a class="navbar-brand">ToDo list</a>
 
 
 <ul class="nav justify-content-end">
