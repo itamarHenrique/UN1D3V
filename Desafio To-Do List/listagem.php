@@ -25,7 +25,45 @@
 
 </nav>
 
+<div class="container mt-5">
+    <h2>Tarefas Cadastradas</h2>
+</div>
 
+
+<div class="container">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tarefa</th>
+      <th scope="col">Data</th>
+      <th scope="col">Ação</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr>
+      <th scope="row"></th>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row"</th>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td colspan="2"></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
