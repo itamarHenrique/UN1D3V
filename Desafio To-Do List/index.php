@@ -1,3 +1,23 @@
+<?php
+
+include_once "./funcoes/validacao.php";
+
+if(!verificaMetodoGet()){
+    
+    $data = $_POST['data-tarefa'];
+    $titulo = $_POST['titulo'];
+
+    $gravou = false;
+
+    if(validarData($data) && validarEntrada($titulo)){
+        $gravou = true;
+    }
+}
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -26,23 +46,31 @@
 </nav>
 
 
+
+<?php if (!verificaMetodoGet()) : ?>
 <div class="container mt-5">
     <h2>Nova Tarefa</h2>
+    <?php include_once "./alertas/alertas.php"; ?>
 </div>
-
+<?php endif; ?>
 
 <div class="container mt-5">
+<form action="" method="post">
     <div class="mb-3">
-    <label for="titulo" class="form-label">Titulo da tarefa</label>
-    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ex: Comprar leite">
-    </div>
-    <div class="mb-3">
-    <label for="data-tarefa" class="form-label">Data da tarefa</label>
-    <input type="text" class="form-control" id="data-tarefa" name="data-tarefa">
-    </div>
-    <button type="button" class="btn btn-primary">Cadastrar tarefa</button>
+        <label for="titulo" class="form-label">Titulo da tarefa</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ex: Comprar leite">
+        </div>
+        <div class="mb-3">
+        <label for="data-tarefa" class="form-label">Data da tarefa</label>
+        <input type="date" class="form-control" id="data-tarefa" name="data-tarefa">
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar tarefa</button>
 
-</div>
+    </div>
+
+</form>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

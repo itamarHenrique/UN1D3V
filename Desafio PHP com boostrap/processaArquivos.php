@@ -50,7 +50,7 @@ else
 }
 
 
-$caminhoArquivo = "C://Downloads/" . $nome . ".txt";
+$caminhoArquivo = $nome . ".txt";
 
 
 

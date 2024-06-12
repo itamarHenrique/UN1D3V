@@ -46,7 +46,7 @@
       <th scope="row"></th>
       <td></td>
       <td></td>
-      <td></td>
+      <td>Excluir</td>
     </tr>
     <tr>
       <th scope="row"</th>
