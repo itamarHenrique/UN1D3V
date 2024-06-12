@@ -62,7 +62,7 @@ session_start();
         </div>
         <div class="mb-3">
         <label for="data-tarefa" class="form-label">Data da tarefa</label>
-        <input type="date" class="form-control" id="data-tarefa" name="data-tarefa">
+        <input type="text" class="form-control" id="data-tarefa" name="data-tarefa">
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar tarefa</button>
 

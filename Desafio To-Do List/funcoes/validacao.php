@@ -6,8 +6,15 @@ function validarEntrada($valor){
 
 
 function validarData($data, $format = "d/m/Y"){
-    $date = DateTime::createFromFormat($format, $data);
-    return $date && $date ->format($format) == $data;
+    $timeZone = new DateTimeZone("America/Bahia");
+    $d = DateTime::createFromFormat('d/m/Y', $data, $timeZone);
+
+    if($d && $d ->format($format) == $data){
+        return true;
+    }else{
+        return false;
+    }
+    
 
 }
 

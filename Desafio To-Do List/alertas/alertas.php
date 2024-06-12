@@ -13,7 +13,7 @@
 <?php endif; ?>
 
 <?php if ($gravou): ?>
-    <div class="alert alert-sucess">
+    <div class="alert alert-success">
         <strong>Uhuuu!</strong>
         Tarefa cadastrada com sucesso!
     </div>
