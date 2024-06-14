@@ -10,10 +10,6 @@ if(!verificaMetodoGet()){
 
 }
 
-if (!isset($_SESSION["tarefas"])) {
-  $_SESSION["tarefas"] = [];
-}
-
 $_SESSION["tarefas"][] = [
   "tarefa" => $titulo,
   "data" => $data
