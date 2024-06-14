@@ -17,6 +17,9 @@ if(!verificaMetodoGet()){
     }
 }
 
+$tarefas = $_SESSION["tarefa"];
+
+print_r($tarefas);
 
 ?>
 

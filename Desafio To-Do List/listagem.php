@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+if (isset($_GET["posicao"])) {
+  unset($_SESSION["tarefas"][$_GET["posicao"]]);
+  header("Location: listagem.php");
+}
+
+
 include "./funcoes/validacao.php";
 
 if(!verificaMetodoGet()){
@@ -9,6 +15,7 @@ if(!verificaMetodoGet()){
   $titulo = $_POST['titulo'];
 
 }
+
 
 $_SESSION["tarefas"][] = [
   "tarefa" => $titulo,
@@ -70,7 +77,9 @@ $tarefas = $_SESSION["tarefa"];
             <th scope="row"><?php echo $chave +1; ?></th>
             <td><?php echo $tarefa["tarefa"]; ?></td>
             <td><?php echo $tarefa["data"]; ?></td>
-            <td><button type="button" class="btn btn-danger">Excluir</button></td>
+            <td><button type="button" class="btn btn-danger"><a href="?posicao=<?php echo $chave; ?>">Excluir</a></button></td>
+            <!-- <td><button type="button" class="btn btn-danger">Excluir</button></td> -->
+
             </tr>
         
           <?php endforeach; ?>
