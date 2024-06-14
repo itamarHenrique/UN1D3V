@@ -52,11 +52,16 @@ print_r($tarefas);
 
 
 
-<?php if (!verificaMetodoGet()) : ?>
+
 <div class="container mt-5">
     <h2>Nova Tarefa</h2>
-    <?php include_once "./alertas/alertas.php"; ?>
+    
 </div>
+
+<?php if (!verificaMetodoGet()) : ?>
+    <div class="container mt-5">
+        <?php include_once "./alertas/alertas.php"; ?>
+    </div>
 <?php endif; ?>
 
 <div class="container mt-5">
