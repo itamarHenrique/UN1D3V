@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+include "./funcoes/validacao.php";
+
+if(!verificaMetodoGet()){
+    
+  $data = $_POST['data-tarefa'];
+  $titulo = $_POST['titulo'];
+
+}
+
+if (!isset($_SESSION["tarefas"])) {
+  $_SESSION["tarefas"] = [];
+}
+
+$_SESSION["tarefas"][] = [
+  "tarefa" => $titulo,
+  "data" => $data
+];
+
+$tarefas = $_SESSION["tarefa"];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -42,23 +68,17 @@
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <tr>
-      <th scope="row"></th>
-      <td></td>
-      <td></td>
-      <td>Excluir</td>
-    </tr>
-    <tr>
-      <th scope="row"</th>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row"></th>
-      <td colspan="2"></td>
-      <td></td>
-    </tr>
+        <?php if(count($tarefas) > 0): ?>
+          <?php foreach($tarefas as $chave => $tarefa): ?>
+            <tr>
+            <th scope="row"><?php echo $chave +1; ?></th>
+            <td><?php echo $tarefa["tarefa"]; ?></td>
+            <td><?php echo $tarefa["data"]; ?></td>
+            <td><button type="button" class="btn btn-danger">Excluir</button></td>
+            </tr>
+        
+          <?php endforeach; ?>
+        <?php endif; ?>
   </tbody>
 </table>
 

@@ -1,6 +1,9 @@
 <?php
 
+session_start();
+
 include_once "./funcoes/validacao.php";
+
 
 if(!verificaMetodoGet()){
     
@@ -14,7 +17,6 @@ if(!verificaMetodoGet()){
     }
 }
 
-session_start();
 
 ?>
 
@@ -62,7 +64,7 @@ session_start();
         </div>
         <div class="mb-3">
         <label for="data-tarefa" class="form-label">Data da tarefa</label>
-        <input type="text" class="form-control" id="data-tarefa" name="data-tarefa">
+        <input type="text" class="form-control" id="data-tarefa" name="data-tarefa" placeholder="Ex: 15/07/2024">
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar tarefa</button>
 
