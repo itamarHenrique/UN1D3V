@@ -2,17 +2,22 @@
 
 session_start();
 
-include_once "./funcoes/validacao.php";
+include "./funcoes/validacao.php";
 
 
 if(!verificaMetodoGet()){
     
-    $data = $_POST['data-tarefa'];
+    $data = $_POST['data'];
     $titulo = $_POST['titulo'];
 
     $gravou = false;
 
     if(validarData($data) && validarEntrada($titulo)){
+        $_SESSION["tarefas"][] = [
+            "tarefa" => $titulo,
+            "data" => $data
+        ];
+        
         $gravou = true;
     }
 }
@@ -49,11 +54,16 @@ if(!verificaMetodoGet()){
 
 
 
-<?php if (!verificaMetodoGet()) : ?>
+
 <div class="container mt-5">
     <h2>Nova Tarefa</h2>
-    <?php include_once "./alertas/alertas.php"; ?>
+    
 </div>
+
+<?php if (!verificaMetodoGet()) : ?>
+    <div class="container mt-5">
+        <?php include "./alertas/alertas.php"; ?>
+    </div>
 <?php endif; ?>
 
 <div class="container mt-5">
@@ -63,8 +73,8 @@ if(!verificaMetodoGet()){
         <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ex: Comprar leite">
         </div>
         <div class="mb-3">
-        <label for="data-tarefa" class="form-label">Data da tarefa</label>
-        <input type="text" class="form-control" id="data-tarefa" name="data-tarefa" placeholder="Ex: 15/07/2024">
+        <label for="data" class="form-label">Data da tarefa</label>
+        <input type="text" class="form-control" id="data" name="data" placeholder="Ex: 15/07/2024">
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar tarefa</button>
 
