@@ -16,9 +16,9 @@ function validarData($data, $format = "d/m/Y"){
 
     if($d && $d ->format($format) == $data){
         return true;
-    }else{
-        return false;
     }
+        
+    return false;
     
 
 }
