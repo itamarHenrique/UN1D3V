@@ -3,7 +3,7 @@ session_start();
 
 include "./funcoes/validacao.php";
 
-if (!verificaMetodoGet()) {
+if (verificaMetodoPost()) {
         $data = $_POST['data-tarefa'];
         $titulo = $_POST['titulo'];
         
@@ -15,6 +15,9 @@ if (!verificaMetodoGet()) {
 }
 
 $tarefas = $_SESSION["tarefas"];
+
+$pesquisa = $_GET['busca'];
+
 ?>
 
 <!DOCTYPE html>
@@ -54,16 +57,26 @@ $tarefas = $_SESSION["tarefas"];
     <h2>Buscar tarefas</h2>
 </div>
 
+
+
 <div class="container mt-5">
 
-<form action="" method="get">
+<form action="busca.php?busca=" method="get">
     <div class="mb-3">
         <label for="busca" class="form-label"></label>
         <input type="text" class="form-control" id="busca" name="busca">
     </div>
 
     <button type="submit" class="btn btn-primary">Buscar tarefa</button>
+
+    
 </form>
+
+<!-- <?php if (verificaMetodoGet()) : ?>
+    <div class="container mt-5">
+        <?php include "./alertas/alertasBusca.php"; ?>
+    </div>
+<?php endif; ?> -->
 
 </div>
 
@@ -77,21 +90,22 @@ $tarefas = $_SESSION["tarefas"];
         <th scope="col">Ação</th>
         </tr>
     </thead>
+<?php validarBusca($pesquisa, $tarefas); ?>
     <tbody class="table-group-divider">
         <?php if(count($tarefas) > 0): ?>
             <?php foreach($tarefas as $chave => $tarefa): ?>
         <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <th scope="row"><?php echo $chave + 1; ?></th>
+        <td><?php echo htmlspecialchars($tarefa["tarefa"]); ?></td>
+        <td><?php echo htmlspecialchars($tarefa["data"]); ?></td>
+        <td></td>
         </tr>
             <?php endforeach; ?>
         <?php endif; ?>
 
     </table>
 </div>
-    
+   
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
