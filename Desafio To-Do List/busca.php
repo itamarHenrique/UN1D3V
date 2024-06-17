@@ -14,12 +14,6 @@ if (!verificaMetodoGet()) {
         ];
 }
 
-if (isset($_GET['posicao'])) {
-    if (isset($_SESSION["tarefas"][$_GET['posicao']])) {
-        unset($_SESSION["tarefas"][$_GET['posicao']]);
-    }
-}
-
 $tarefas = $_SESSION["tarefas"];
 ?>
 
@@ -28,11 +22,13 @@ $tarefas = $_SESSION["tarefas"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem</title>
+    <title>Buscar tarefa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles/style.css">
+
 </head>
 <body>
+
 
 <nav class="navbar" style="background-color: #0B7BFF">
 
@@ -54,35 +50,48 @@ $tarefas = $_SESSION["tarefas"];
 
 </nav>
 
+<div class="container mt-5">
+    <h2>Buscar tarefas</h2>
+</div>
 
 <div class="container mt-5">
-    <h2>Tarefas Cadastradas</h2>
+
+<form action="" method="get">
+    <div class="mb-3">
+        <label for="busca" class="form-label"></label>
+        <input type="text" class="form-control" id="busca" name="busca">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Buscar tarefa</button>
+</form>
+
 </div>
 
-<div class="container">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Tarefa</th>
-      <th scope="col">Data</th>
-      <th scope="col">Ação</th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
+<div class="container mt-5">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tarefa</th>
+        <th scope="col">Data</th>
+        <th scope="col">Ação</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
         <?php if(count($tarefas) > 0): ?>
-          <?php foreach($tarefas as $chave => $tarefa): ?>
-            <tr>
-            <th scope="row"><?php echo $chave + 1; ?></th>
-            <td><?php echo htmlspecialchars($tarefa["tarefa"]); ?></td>
-            <td><?php echo htmlspecialchars($tarefa["data"]); ?></td>
-            <td><button type="button" class="btn btn-danger"><a href="listagem.php?posicao=<?php echo $chave; ?>">Excluir</a></button></td>
-            </tr>
-          <?php endforeach; ?>
+            <?php foreach($tarefas as $chave => $tarefa): ?>
+        <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        </tr>
+            <?php endforeach; ?>
         <?php endif; ?>
-  </tbody>
-</table>
+
+    </table>
 </div>
+    
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
