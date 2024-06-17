@@ -33,11 +33,8 @@ $tarefas = $_SESSION["tarefas"];
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-
 <nav class="navbar" style="background-color: #0B7BFF">
-
 <a class="navbar-brand">ToDo list</a>
-
 <ul class="nav justify-content-end">
 
 <li class="nav-item1 opacity-100">
@@ -51,7 +48,6 @@ $tarefas = $_SESSION["tarefas"];
     <a class="nav-link" href="listagem.php">Listar tarefa</a>
 </li>
 </ul>
-
 </nav>
 
 
