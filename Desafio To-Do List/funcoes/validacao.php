@@ -27,13 +27,8 @@ function verificaMetodoPost(){
     return $_SERVER['REQUEST_METHOD'] == 'POST';
 }
 
-
-function validarTamanhoBusca($tarefa){
-    return strlen($tarefa) > 3;
-}
-
-function estaVazioBusca($tarefa){
-    return empty($tarefa);
+function validacaoTamanhoBusca($pesquisa){
+    return empty($pesquisa) && strlen($pesquisa) > 3;
 }
 
 function validarBusca($busca, $tarefas) {
@@ -41,7 +36,7 @@ function validarBusca($busca, $tarefas) {
     $letraMinuscula = strtolower($busca);
 
     foreach($tarefas as $tarefa){
-        if(str_contains($tarefa['tarefa'], $letraMinuscula)){
+        if(str_contains(strtolower($tarefa['tarefa']), $letraMinuscula)){
             $tarefasFiltradas[] = $tarefa;
         }
     }

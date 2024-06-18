@@ -16,7 +16,15 @@ if (verificaMetodoPost()) {
 
 $tarefas = $_SESSION["tarefas"];
 
-$pesquisa = $_GET['busca'];
+$pesquisa = $_GET['busca'] ?? '';
+
+$buscas = validarBusca($pesquisa, $tarefas);
+
+// var_dump($tarefas);
+
+var_dump($pesquisa);
+
+// var_dump($buscas);
 
 ?>
 
@@ -61,6 +69,7 @@ $pesquisa = $_GET['busca'];
 
 <div class="container mt-5">
 
+<?php if (verificaMetodoGet()) : ?>
 <form action="busca.php?busca=" method="get">
     <div class="mb-3">
         <label for="busca" class="form-label"></label>
@@ -71,12 +80,16 @@ $pesquisa = $_GET['busca'];
 
     
 </form>
+<?php endif; ?>
+<!-- 
+<?php if(verificaMetodoPost()): ?>
 
-<!-- <?php if (verificaMetodoGet()) : ?>
-    <div class="container mt-5">
-        <?php include "./alertas/alertasBusca.php"; ?>
-    </div>
+<div class="container mt-5">
+    <?php include './alertas/alertasBusca.php'; ?>
+</div>
+
 <?php endif; ?> -->
+
 
 </div>
 
@@ -90,17 +103,19 @@ $pesquisa = $_GET['busca'];
         <th scope="col">Ação</th>
         </tr>
     </thead>
-<?php validarBusca($pesquisa, $tarefas); ?>
+
     <tbody class="table-group-divider">
-        <?php if(count($tarefas) > 0): ?>
-            <?php foreach($tarefas as $chave => $tarefa): ?>
-        <tr>
-        <th scope="row"><?php echo $chave + 1; ?></th>
-        <td><?php echo htmlspecialchars($tarefa["tarefa"]); ?></td>
-        <td><?php echo htmlspecialchars($tarefa["data"]); ?></td>
-        <td></td>
-        </tr>
-            <?php endforeach; ?>
+        <?php if(!is_null($pesquisa)) : ?>
+            <?php if(count($buscas) > 0): ?>
+                <?php foreach($buscas as $chave => $busca): ?>
+            <tr>
+            <th scope="row"><?php echo $chave + 1; ?></th>
+            <td><?php echo htmlspecialchars($busca["tarefa"]); ?></td>
+            <td><?php echo htmlspecialchars($busca["data"]); ?></td>
+            <td></td>
+            </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
         <?php endif; ?>
 
     </table>
