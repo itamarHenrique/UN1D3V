@@ -14,17 +14,25 @@ if (verificaMetodoPost()) {
         ];
 }
 
+if (isset($_GET['posicao'])) {
+    if (isset($_SESSION["tarefas"][$_GET['posicao']])) {
+        unset($_SESSION["tarefas"][$_GET['posicao']]);
+    }
+}
+
+
 $tarefas = $_SESSION["tarefas"];
 
-$pesquisa = $_GET['busca'] ?? '';
+$pesquisa = $_GET['busca'];
 
 $buscas = validarBusca($pesquisa, $tarefas);
 
 // var_dump($tarefas);
 
-var_dump($pesquisa);
+// var_dump($pesquisa);
 
 // var_dump($buscas);
+
 
 ?>
 
@@ -112,7 +120,8 @@ var_dump($pesquisa);
             <th scope="row"><?php echo $chave + 1; ?></th>
             <td><?php echo htmlspecialchars($busca["tarefa"]); ?></td>
             <td><?php echo htmlspecialchars($busca["data"]); ?></td>
-            <td></td>
+            <td><button type="button" class="btn btn-danger"><a href="busca.php?posicao=<?php echo $chave; ?>">Excluir</a></button></td>
+
             </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
