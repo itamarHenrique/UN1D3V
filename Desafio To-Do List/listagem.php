@@ -4,7 +4,7 @@ session_start();
 include "./funcoes/validacao.php";
 
 if (!verificaMetodoGet()) {
-        $data = $_POST['data-tarefa'];
+        $data = $_POST['data'];
         $titulo = $_POST['titulo'];
         
         // Adiciona a nova tarefa à sessão
@@ -14,9 +14,13 @@ if (!verificaMetodoGet()) {
         ];
 }
 
+$tarefaExcluida = false;
+
 if (isset($_GET['posicao'])) {
     if (isset($_SESSION["tarefas"][$_GET['posicao']])) {
         unset($_SESSION["tarefas"][$_GET['posicao']]);
+        $_SESSION["tarefas"] = array_values($_SESSION["tarefas"]);
+        $tarefaExcluida = true;
     }
 }
 
@@ -66,7 +70,7 @@ $tarefas = $_SESSION["tarefas"];
     </tr>
   </thead>
   <tbody class="table-group-divider">
-        <?php if(count($tarefas) > 0): ?>
+        <?php if(count($tarefas) > 0 && isset($tarefas)): ?>
           <?php foreach($tarefas as $chave => $tarefa): ?>
             <tr>
             <th scope="row"><?php echo $chave + 1; ?></th>

@@ -15,13 +15,15 @@ if (verificaMetodoPost()) {
 }
 
 if (isset($_GET['posicao'])) {
-    if (isset($_SESSION["tarefas"][$_GET['posicao']])) {
-        unset($_SESSION["tarefas"][$_GET['posicao']]);
+    $posicao = $_GET['posicao'];
+    if (isset($_SESSION["tarefas"][$posicao])) {
+        unset($_SESSION["tarefas"][$posicao]);
+        $_SESSION["tarefas"] = array_values($_SESSION["tarefas"]);
     }
 }
 
 
-$tarefas = $_SESSION["tarefas"];
+$tarefas = isset($_SESSION["tarefas"]) ? $_SESSION["tarefas"] : [];
 
 $pesquisa = $_GET['busca'];
 
@@ -70,24 +72,22 @@ $buscas = validarBusca($pesquisa, $tarefas);
 </nav>
 
 <div class="container mt-5">
-    <h2>Buscar tarefas</h2>
+            <label for="buscar_tarefa">
+                <h2 class="text-primary fw-semibold">Buscar Tarefas</h2>
+            </label>
 </div>
 
 
 
-<div class="container mt-5">
-
 <?php if (verificaMetodoGet()) : ?>
-<form action="busca.php?busca=" method="get">
-    <div class="mb-3">
-        <label for="busca" class="form-label"></label>
-        <input type="text" class="form-control" id="busca" name="busca">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Buscar tarefa</button>
-
-    
-</form>
+    <form action="busca.php" method="get">
+                <div class="container mt-5">
+                    <div class="col d-flex align-items-center">
+                        <input type="text" class="form-control me-2 w-75" id="busca" name="busca" autocomplete="on">
+                        <button type="submit" class="btn btn-primary w-25">Buscar Tarefa</button>
+                    </div>
+                </div>
+            </form>
 <?php endif; ?>
 <!-- 
 <?php if(verificaMetodoPost()): ?>
@@ -117,7 +117,7 @@ $buscas = validarBusca($pesquisa, $tarefas);
             <?php if(count($buscas) > 0): ?>
                 <?php foreach($buscas as $chave => $busca): ?>
             <tr>
-            <th scope="row"><?php echo $chave + 1; ?></th>
+            <th scope="row"><?php echo $chave +1; ?></th>
             <td><?php echo htmlspecialchars($busca["tarefa"]); ?></td>
             <td><?php echo htmlspecialchars($busca["data"]); ?></td>
             <td><button type="button" class="btn btn-danger"><a href="busca.php?posicao=<?php echo $chave; ?>">Excluir</a></button></td>
