@@ -27,7 +27,13 @@ $tarefas = isset($_SESSION["tarefas"]) ? $_SESSION["tarefas"] : [];
 
 $pesquisa = $_GET['busca'];
 
-$buscas = validarBusca($pesquisa, $tarefas);
+if(empty($pesquisa)){
+    $buscas = [];
+}else{
+    $buscas = validarBusca($pesquisa, $tarefas);
+}
+
+
 
 // var_dump($tarefas);
 
