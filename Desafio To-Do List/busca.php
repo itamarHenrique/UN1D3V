@@ -25,12 +25,14 @@ if (isset($_GET['posicao'])) {
 
 $tarefas = isset($_SESSION["tarefas"]) ? $_SESSION["tarefas"] : [];
 
-$pesquisa = $_GET['busca'];
+$pesquisa = isset($_GET['busca']) ? $_GET['busca'] : '';
+
 
 if(empty($pesquisa)){
     $buscas = [];
 }else{
     $buscas = validarBusca($pesquisa, $tarefas);
+    $numeroBuscas = count($buscas);
 }
 
 
@@ -95,14 +97,33 @@ if(empty($pesquisa)){
                 </div>
             </form>
 <?php endif; ?>
-<!-- 
-<?php if(verificaMetodoPost()): ?>
+
 
 <div class="container mt-5">
-    <?php include './alertas/alertasBusca.php'; ?>
-</div>
 
-<?php endif; ?> -->
+<?php if(!estaVazio($buscas)) : ?>
+
+    <p class="fw-normal fs-2">Foram encontrados <span class="fw-bold"><?php echo $numeroBuscas ?> registros</span> com a palavra-chave <span class="fw-bold">"<?php echo $pesquisa?>"</span></p>
+<?php endif; ?>
+
+
+<?php if(validarTamanho($pesquisa)): ?>
+    <div class="alert alert-danger">
+        <strong>OPS!!!!<br></strong>
+        <span>Você precisa informar ao menos 3 caracteres para realizar a sua busca</span>
+    </div>
+<?php endif; ?>
+
+
+<?php if(estaVazio($buscas)): ?>
+
+    <div class="alert alert-danger">
+        <strong>OPS!!! <br></strong>
+        <span>Não foram encontrados registros com a palavra-chave <span class="fw-bold"><?php echo $pesquisa ?></span></span>
+    </div>
+
+<?php endif; ?>
+</div>
 
 
 </div>

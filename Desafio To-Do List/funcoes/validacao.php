@@ -27,8 +27,12 @@ function verificaMetodoPost(){
     return $_SERVER['REQUEST_METHOD'] == 'POST';
 }
 
-function validacaoTamanhoBusca($pesquisa){
-    return empty($pesquisa) && strlen($pesquisa) > 3;
+function estaVazio($pesquisa){
+    return empty($pesquisa);
+}
+
+function validarTamanho($pesquisa){
+    return strlen($pesquisa) < 3;
 }
 
 function validarBusca($busca, $tarefas) {
