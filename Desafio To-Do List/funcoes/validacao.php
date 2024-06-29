@@ -8,11 +8,11 @@ function validarEntrada($valor){
 
 function validarData($data, $format = "d/m/Y") {
     $timeZone = new DateTimeZone("America/Bahia");
-    $d = DateTime::createFromFormat($format, $data, $timeZone);
+    $date = DateTime::createFromFormat($format, $data, $timeZone);
 
-    if ($d && $d->format($format) == $data) {
+    if ($date && $date->format($format) == $data) {
         $hoje = new DateTime('now', $timeZone);
-        if ($d >= $hoje) {
+        if ($date >= $hoje) {
             return true;
         }
     }
