@@ -6,17 +6,18 @@ function validarEntrada($valor){
 
 
 
-function validarData($data, $format = "d/m/Y"){
+function validarData($data, $format = "d/m/Y") {
     $timeZone = new DateTimeZone("America/Bahia");
-    $d = DateTime::createFromFormat('d/m/Y', $data, $timeZone);
+    $d = DateTime::createFromFormat($format, $data, $timeZone);
 
-    if($d && $d ->format($format) == $data){
-        return true;
+    if ($d && $d->format($format) == $data) {
+        $hoje = new DateTime('now', $timeZone);
+        if ($d >= $hoje) {
+            return true;
+        }
     }
         
     return false;
-    
-
 }
 
 function verificaMetodoGet(){
