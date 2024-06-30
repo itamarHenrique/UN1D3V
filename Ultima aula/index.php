@@ -7,25 +7,18 @@ $senha = "";
 
 // Conexão
 try {
+    // $link = mysqli_connect("localhost", "USUARIO", "SENHA", "BASE");
     $mysqli = new mysqli("localhost", "root", "" , "unidev", 3306);
+
+    if($mysqli -> connect_error){
+        echo "Desconectado! Erro: ";
+    }else{
+        echo "Sucesso: Conectado ao banco de dados!";
+    }
 } catch(Exception $e) {
     echo $e;
     die('Não consegui me conectar nessa bagaça!!!');
 }
-
-$statement = $mysqli->prepare("INSERT INTO alunos (nome, sobrenome, email, idade) VALUES (?, ?, ?, ?)");
-
-$nome = $_GET['nome'];
-$sobrenome = $_GET['sobrenome'];
-$email = $_GET['email'];
-$idade = $_GET['idade'];
-
-$statement->bind_param("sssi", $nome, $sobrenome, $email, $idade);
-
-$statement->execute();
-
-// Executar o SQL
-$result = $mysqli->query("SELECT alunos.id, alunos.nome, alunos.sobrenome, alunos.email, cursos.nome AS curso FROM alunos LEFT JOIN cursos ON cursos.id = alunos.curso_id");
 
 ?>
 <!DOCTYPE html>
