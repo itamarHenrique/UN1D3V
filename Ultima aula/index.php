@@ -7,14 +7,9 @@ $senha = "";
 
 // Conexão
 try {
-    // $link = mysqli_connect("localhost", "USUARIO", "SENHA", "BASE");
+
     $mysqli = new mysqli("localhost", "root", "" , "unidev", 3306);
 
-    if($mysqli -> connect_error){
-        echo "Desconectado! Erro: ";
-    }else{
-        echo "Sucesso: Conectado ao banco de dados!";
-    }
 } catch(Exception $e) {
     die('Conexão não realizada!');
 }

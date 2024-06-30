@@ -1,7 +1,5 @@
 <?php
 
-
-
 function validarEntrada($valor){
     return !empty($valor) && strlen($valor) > 5;
 }
