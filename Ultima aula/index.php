@@ -16,8 +16,7 @@ try {
         echo "Sucesso: Conectado ao banco de dados!";
     }
 } catch(Exception $e) {
-    echo $e;
-    die('Não consegui me conectar nessa bagaça!!!');
+    die('Conexão não realizada!');
 }
 
 ?>
