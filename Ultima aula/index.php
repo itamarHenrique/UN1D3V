@@ -5,6 +5,7 @@ $bancoDeDados = "unidev";
 $usuario = "root";
 $senha = "";
 
+
 // Conexão
 try {
 
@@ -13,6 +14,12 @@ try {
 } catch(Exception $e) {
     die('Conexão não realizada!');
 }
+
+$statement = $mysqli->prepare('INSERT INTO tarefa (titulo, datas) VALUES (?, ?)');
+
+$statement->bind_param("si", $titulo, $data);
+
+$statement->execute();
 
 ?>
 <!DOCTYPE html>

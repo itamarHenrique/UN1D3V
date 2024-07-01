@@ -9,12 +9,14 @@ try {
     die('Conexão não realizada!');
 }
 
-session_start();
+$statement = $mysqli->prepare('INSERT INTO tarefa (titulo) VALUES (?)');
+
+$statement->bind_param("s", $titulo);
 
 include "./funcoes/validacao.php";
 
 
-if(!verificaMetodoGet()){
+if(verificaMetodoPost()){
     
     $data = $_POST['data'];
     $titulo = $_POST['titulo'];
@@ -22,12 +24,13 @@ if(!verificaMetodoGet()){
     $gravou = false;
 
     if(validarData($data) && validarEntrada($titulo)){
-        $_SESSION["tarefas"][] = [
-            "tarefa" => $titulo,
-            "data" => $data
-        ];
-        
-        $gravou = true;
+
+        if($statement->execute()){
+            echo "Tarefa cadastrada com sucesso";
+            $gravou = true;
+        }
+    }else{
+        echo "Dados invalidos";
     }
 }
 

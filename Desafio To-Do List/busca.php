@@ -8,7 +8,6 @@ try {
 } catch(Exception $e) {
     die('Conexão não realizada!');
 }
-session_start();
 
 include "./funcoes/validacao.php";
 
