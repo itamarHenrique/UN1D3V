@@ -19,8 +19,7 @@ $pesquisaValida = strlen($pesquisa) > 3;
 
 if (!empty($pesquisa)) {
     $pesquisaSQL = "%{$pesquisa}%";
-    $sqlBusca = "SELECT * FROM tarefa WHERE titulo LIKE ?";
-    $statement = $mysqli->prepare($sqlBusca);
+    $statement = $mysqli->prepare("SELECT * FROM tarefa WHERE titulo LIKE ?");
     $statement->bind_param('s', $pesquisaSQL);
     $statement->execute();
     $result = $statement->get_result();
