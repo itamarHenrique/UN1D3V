@@ -5,40 +5,28 @@ require "./funcoes/conexao.php";
 
 include "./funcoes/validacao.php";
 
-if (verificaMetodoPost()) {
-        $data = $_POST['data-tarefa'];
-        $titulo = $_POST['titulo'];
-        
-        // Adiciona a nova tarefa à sessão
-        $_SESSION["tarefas"][] = [
-            "tarefa" => $titulo,
-            "data" => $data
-        ];
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+    $sqlExclusao = "DELETE FROM tarefa WHERE id = ?";
+    $statement = $mysqli->prepare($sqlExclusao);
+    $statement->bind_param('i', $id);
+    $statement->execute();
 }
 
-if (isset($_GET['excluir'])) {
-    $posicao = $_GET['excluir'];
-    if (isset($_SESSION["tarefas"][$posicao])) {
-        unset($_SESSION["tarefas"][$posicao]);
-        $_SESSION["tarefas"] = array_values($_SESSION["tarefas"]);
-    }
-}
-
-
-$tarefas = isset($_SESSION["tarefas"]) ? $_SESSION["tarefas"] : [];
 
 $pesquisa = isset($_GET['busca']) ? $_GET['busca'] : '';
+$pesquisaValida = strlen($pesquisa) > 3;
 
-// $busca = $_GET['busca'];
-
-if(empty($pesquisa)){
-    $buscas = [];
-}else{
-    $buscas = validarBusca($pesquisa, $tarefas);
-    $numeroBuscas = count($buscas);
+if (!empty($pesquisa)) {
+    $pesquisaSQL = "%{$pesquisa}%";
+    $sqlBusca = "SELECT * FROM tarefa WHERE titulo LIKE ?";
+    $statement = $mysqli->prepare($sqlBusca);
+    $statement->bind_param('s', $pesquisaSQL);
+    $statement->execute();
+    $result = $statement->get_result();
+} else {
+    $result = null;
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -75,9 +63,9 @@ if(empty($pesquisa)){
 </nav>
 
 <div class="container mt-5">
-            <label for="buscar_tarefa">
-                <h2 class="text-primary fw-semibold">Buscar Tarefas</h2>
-            </label>
+        <label for="buscar_tarefa">
+            <h2 class="text-primary fw-semibold">Buscar Tarefas</h2>
+        </label>
 </div>
 
 
@@ -95,60 +83,44 @@ if(empty($pesquisa)){
 
 
 <div class="container mt-5">
-
-<?php if(!estaVazio($buscas)) : ?>
-
-    <p class="fw-normal fs-2">Foram encontrados <span class="fw-bold"><?php echo $numeroBuscas ?> registros</span> com a palavra-chave <span class="fw-bold">"<?php echo $pesquisa?>"</span></p>
-<?php endif; ?>
-
-
-<?php if(validarTamanho($pesquisa)): ?>
-    <div class="alert alert-danger">
-        <strong>OPS!!!!<br></strong>
-        <span>Você precisa informar ao menos 3 caracteres para realizar a sua busca</span>
-    </div>
-<?php endif; ?>
-
-
-<?php if(estaVazio($buscas)): ?>
-
+<?php if ($pesquisaValida && isset($result) && $result->num_rows > 0): ?>
+    <p class="fw-normal fs-2">Foram encontrados <span class="fw-bold"><?php echo $result->num_rows ?> registros</span> com a palavra-chave <span class="fw-bold">"<?php echo htmlspecialchars($pesquisa) ?>"</span></p>
+<?php elseif (!$pesquisaValida && !empty($pesquisa)): ?>
     <div class="alert alert-danger">
         <strong>OPS!!! <br></strong>
-        <span>Não foram encontrados registros com a palavra-chave <span class="fw-bold"><?php echo $pesquisa ?></span></span>
+        <span>Você precisa informar ao menos 3 caracteres para realizar a sua busca.</span>
     </div>
-
+<?php elseif ($pesquisaValida && isset($result)): ?>
+    <div class="alert alert-danger">
+        <strong>OPS!!! <br></strong>
+        <span>Não foram encontrados registros com a palavra-chave <span class="fw-bold"><?php echo htmlspecialchars($pesquisa) ?></span></span>
+    </div>
 <?php endif; ?>
 </div>
 
-
-</div>
 
 <div class="container mt-5">
     <table class="table table-striped">
         <thead>
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Tarefa</th>
-        <th scope="col">Data</th>
-        <th scope="col">Ação</th>
-        </tr>
-    </thead>
-
-    <tbody class="table-group-divider">
-        <?php if(!is_null($pesquisa)) : ?>
-            <?php if(count($buscas) > 0): ?>
-                <?php foreach($buscas as $chave => $busca): ?>
             <tr>
-            <th scope="row"><?php echo $chave +1; ?></th>
-            <td><?php echo htmlspecialchars($busca["tarefa"]); ?></td>
-            <td><?php echo htmlspecialchars($busca["data"]); ?></td>
-            <td><button type="button" class="btn btn-danger"><a href="busca.php?excluir=<?php echo $chave; ?>">Excluir</a></button></td>
-
+                <th scope="col">#</th>
+                <th scope="col">Tarefa</th>
+                <th scope="col">Data</th>
+                <th scope="col">Ação</th>
             </tr>
-                <?php endforeach; ?>
-            <?php endif; ?>
+        </thead>
+        <tbody class="table-group-divider">
+        <?php if ($pesquisaValida && isset($result)): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo htmlspecialchars($row['titulo']); ?></td>
+                    <td><?php echo htmlspecialchars($row['datas']); ?></td>
+                    <td><a href="listagem.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Excluir</a></td>
+                </tr>
+            <?php endwhile; ?>
         <?php endif; ?>
-
+        </tbody>
     </table>
 </div>
    
