@@ -1,5 +1,6 @@
 <?php
-
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 // Conexão
 try {
 
@@ -9,11 +10,7 @@ try {
     die('Conexão não realizada!');
 }
 
-$statement = $mysqli->prepare('INSERT INTO tarefa (titulo) VALUES (?)');
-
-$statement->bind_param("s", $titulo);
-
-include "./funcoes/validacao.php";
+include_once "./funcoes/validacao.php";
 
 
 if(verificaMetodoPost()){
@@ -23,15 +20,22 @@ if(verificaMetodoPost()){
 
     $gravou = false;
 
-    if(validarData($data) && validarEntrada($titulo)){
+    $dataValidada = validarData($data);
+
+    if(validarEntrada($titulo) && validarData($data)){
+
+        $statement = $mysqli->prepare('INSERT INTO tarefa (titulo, datas) VALUES (?, ?)');
+
+        $statement->bind_param("ss", $titulo, $dataValidada);
 
         if($statement->execute()){
-            echo "Tarefa cadastrada com sucesso";
             $gravou = true;
         }
+
     }else{
         echo "Dados invalidos";
     }
+        
 }
 
 
@@ -77,7 +81,7 @@ if(verificaMetodoPost()){
     
 </div>
 
-<?php if (!verificaMetodoGet()) : ?>
+<?php if (verificaMetodoPost()) : ?>
     <div class="container mt-5">
         <?php include "./alertas/alertas.php"; ?>
     </div>

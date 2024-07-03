@@ -35,6 +35,7 @@ $tarefas = isset($_SESSION["tarefas"]) ? $_SESSION["tarefas"] : [];
 
 $pesquisa = isset($_GET['busca']) ? $_GET['busca'] : '';
 
+// $busca = $_GET['busca'];
 
 if(empty($pesquisa)){
     $buscas = [];

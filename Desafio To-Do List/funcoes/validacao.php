@@ -13,7 +13,9 @@ function validarData($data, $format = "d/m/Y") {
     if ($date && $date->format($format) == $data) {
         $hoje = new DateTime('now', $timeZone);
         if ($date >= $hoje) {
-            return true;
+
+            return $date->format("Y-m-d");
+        
         }
     }
         

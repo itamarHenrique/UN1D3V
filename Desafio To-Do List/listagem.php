@@ -1,40 +1,31 @@
 <?php
 
-// Conexão
-try {
+  try {
 
-  $mysqli = new mysqli("localhost", "root", "" , "unidev", 3306);
+    $mysqli = new mysqli("localhost", "root", "" , "unidev", 3306);
+  
+  } catch(Exception $e) {
+    die('Conexão não realizada!');
+  }
+  
 
-} catch(Exception $e) {
-  die('Conexão não realizada!');
-}
+    $sql = "SELECT * FROM tarefa";
 
-session_start();
+    $result = $mysqli->query($sql);
 
-include "./funcoes/validacao.php";
+  $tarefaExcluida = false;
 
-if (!verificaMetodoGet()) {
-        $data = $_POST['data'];
-        $titulo = $_POST['titulo'];
-        
-        // Adiciona a nova tarefa à sessão
-        $_SESSION["tarefas"][] = [
-            "tarefa" => $titulo,
-            "data" => $data
-        ];
-}
+  if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+    $sqlExclusao = "DELETE FROM tarefa WHERE id = ?";
+    $statement = $mysqli->prepare($sqlExclusao);
+    $statement->bind_param('i', $id);
+    $statement->execute();
+  
+  }
 
-$tarefaExcluida = false;
+  $tarefaExcluida = false;
 
-if (isset($_GET['posicao'])) {
-    if (isset($_SESSION["tarefas"][$_GET['posicao']])) {
-        unset($_SESSION["tarefas"][$_GET['posicao']]);
-        $_SESSION["tarefas"] = array_values($_SESSION["tarefas"]);
-        $tarefaExcluida = true;
-    }
-}
-
-$tarefas = $_SESSION["tarefas"];
 ?>
 
 <!DOCTYPE html>
@@ -80,16 +71,13 @@ $tarefas = $_SESSION["tarefas"];
     </tr>
   </thead>
   <tbody class="table-group-divider">
-        <?php if(count($tarefas) > 0 && isset($tarefas)): ?>
-          <?php foreach($tarefas as $chave => $tarefa): ?>
-            <tr>
-            <th scope="row"><?php echo $chave + 1; ?></th>
-            <td><?php echo htmlspecialchars($tarefa["tarefa"]); ?></td>
-            <td><?php echo htmlspecialchars($tarefa["data"]); ?></td>
-            <td><button type="button" class="btn btn-danger"><a href="listagem.php?posicao=<?php echo $chave; ?>">Excluir</a></button></td>
-            </tr>
-          <?php endforeach; ?>
-        <?php endif; ?>
+  <?php while ($row = $result->fetch_assoc()): ?>
+    <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['titulo']; ?></td>
+            <td><?php echo $row['datas']; ?></td>
+            <td><a href="listagem.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"">Excluir</a></td>
+  <?php endwhile; ?>
   </tbody>
 </table>
 </div>
