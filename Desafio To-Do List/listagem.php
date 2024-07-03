@@ -1,20 +1,13 @@
 <?php
 
-  try {
-
-    $mysqli = new mysqli("localhost", "root", "" , "unidev", 3306);
-  
-  } catch(Exception $e) {
-    die('Conexão não realizada!');
-  }
+  require "./funcoes/conexao.php";
   
 
     $sql = "SELECT * FROM tarefa";
 
     $result = $mysqli->query($sql);
 
-  $tarefaExcluida = false;
-
+    
   if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
     $sqlExclusao = "DELETE FROM tarefa WHERE id = ?";
@@ -23,9 +16,6 @@
     $statement->execute();
   
   }
-
-  $tarefaExcluida = false;
-
 ?>
 
 <!DOCTYPE html>

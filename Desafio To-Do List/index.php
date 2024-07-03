@@ -1,14 +1,9 @@
 <?php
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
+
 // Conexão
-try {
-
-    $mysqli = new mysqli("localhost", "root", "" , "unidev", 3306);
-
-} catch(Exception $e) {
-    die('Conexão não realizada!');
-}
+require "./funcoes/conexao.php";
 
 include_once "./funcoes/validacao.php";
 
@@ -37,7 +32,6 @@ if(verificaMetodoPost()){
     }
         
 }
-
 
 ?>
 
