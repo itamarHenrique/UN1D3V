@@ -65,7 +65,7 @@
     <tr>
             <td><?php echo $row['id']; ?></td>
             <td><?php echo $row['titulo']; ?></td>
-            <td><?php echo $row['datas']; ?></td>
+            <td><?php echo date('d/m/Y', strtotime($row['datas'])) ; ?></td>
             <td><a href="listagem.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"">Excluir</a></td>
   <?php endwhile; ?>
   </tbody>
