@@ -3,9 +3,9 @@
   require "./funcoes/conexao.php";
   
 
-    $sql = "SELECT * FROM tarefa";
+    // $sql = "SELECT * FROM tarefa";
 
-    $result = $mysqli->query($sql);
+    $result = $mysqli->query("SELECT * FROM tarefa");
 
     
   if (isset($_GET['id'])) {
@@ -54,7 +54,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">id</th>
       <th scope="col">Tarefa</th>
       <th scope="col">Data</th>
       <th scope="col">Ação</th>
