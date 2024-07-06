@@ -66,7 +66,7 @@
             <td><?php echo $row['id']; ?></td>
             <td><?php echo $row['titulo']; ?></td>
             <td><?php echo date('d/m/Y', strtotime($row['datas'])) ; ?></td>
-            <td><a href="listagem.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"">Excluir</a></td>
+            <td><a href="listagem.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir essa tarefa?')">Excluir</a></td>
   <?php endwhile; ?>
   </tbody>
 </table>

@@ -115,8 +115,8 @@ if (!empty($pesquisa)) {
                     <td><?php echo $row['id']; ?></td>
                     <td><?php echo htmlspecialchars($row['titulo']); ?></td>
                     <td><?php echo htmlspecialchars($row['datas']); ?></td>
-                    <td><a href="listagem.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Excluir</a></td>
-                </tr>
+                    <td><a href="listagem.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir essa tarefa?')">Excluir</a></td>
+                    </tr>
             <?php endwhile; ?>
         <?php endif; ?>
         </tbody>

@@ -87,7 +87,7 @@ if(verificaMetodoPost()){
         </div>
         <div class="mb-3">
         <label for="data" class="form-label">Data da tarefa</label>
-        <input type="date" class="form-control" id="data" name="data" placeholder="Ex: 15/07/2024">
+        <input type="date" class="form-control" id="data" name="data">
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar tarefa</button>
 
