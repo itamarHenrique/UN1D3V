@@ -6,7 +6,7 @@ function validarEntrada($valor){
 
 
 
-function validarData($data, $format = "d/m/Y") {
+function validarData($data, $format = "Y-m-d") {
     $timeZone = new DateTimeZone("America/Bahia");
     $date = DateTime::createFromFormat($format, $data, $timeZone);
 
