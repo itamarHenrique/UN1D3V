@@ -14,6 +14,8 @@
     $statement = $mysqli->prepare($sqlExclusao);
     $statement->bind_param('i', $id);
     $statement->execute();
+    
+    $statement->close();
   
   }
 ?>
