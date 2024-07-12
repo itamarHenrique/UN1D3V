@@ -1,9 +1,7 @@
 <?php
 
   require "./funcoes/conexao.php";
-  
 
-    // $sql = "SELECT * FROM tarefa";
 
     $result = $mysqli->query("SELECT * FROM tarefa");
 
@@ -14,7 +12,7 @@
     $statement = $mysqli->prepare($sqlExclusao);
     $statement->bind_param('i', $id);
     $statement->execute();
-  
+    header("Location: listagem.php");
   }
 ?>
 

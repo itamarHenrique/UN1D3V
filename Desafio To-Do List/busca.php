@@ -11,6 +11,7 @@ if (isset($_GET['id'])) {
     $statement = $mysqli->prepare($sqlExclusao);
     $statement->bind_param('i', $id);
     $statement->execute();
+    header("Location: busca.php");
 }
 
 

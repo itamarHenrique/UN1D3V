@@ -11,7 +11,7 @@ function validarData($data, $format = "Y-m-d") {
     $date = DateTime::createFromFormat($format, $data, $timeZone);
 
     if ($date && $date->format($format) == $data) {
-        $hoje = new DateTime('now', $timeZone);
+        $hoje = new DateTime('today', $timeZone);
         if ($date >= $hoje) {
 
             return $date->format("Y-m-d");
