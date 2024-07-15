@@ -12,13 +12,10 @@
     $statement = $mysqli->prepare($sqlExclusao);
     $statement->bind_param('i', $id);
     $statement->execute();
-<<<<<<< HEAD
     header("Location: listagem.php");
-=======
     
     $statement->close();
   
->>>>>>> refs/remotes/origin/main
   }
 ?>
 

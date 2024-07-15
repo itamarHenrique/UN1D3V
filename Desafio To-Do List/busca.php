@@ -11,11 +11,8 @@ if (isset($_GET['id'])) {
     $statement = $mysqli->prepare($sqlExclusao);
     $statement->bind_param('i', $id);
     $statement->execute();
-<<<<<<< HEAD
     header("Location: busca.php");
-=======
     $statement->close();
->>>>>>> refs/remotes/origin/main
 }
 
 
