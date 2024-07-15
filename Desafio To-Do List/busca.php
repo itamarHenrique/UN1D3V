@@ -11,7 +11,11 @@ if (isset($_GET['id'])) {
     $statement = $mysqli->prepare($sqlExclusao);
     $statement->bind_param('i', $id);
     $statement->execute();
+<<<<<<< HEAD
     header("Location: busca.php");
+=======
+    $statement->close();
+>>>>>>> refs/remotes/origin/main
 }
 
 
@@ -24,6 +28,7 @@ if (!empty($pesquisa)) {
     $statement->bind_param('s', $pesquisaSQL);
     $statement->execute();
     $result = $statement->get_result();
+    $statement->close();
 } else {
     $result = null;
 }
