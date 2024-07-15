@@ -46,7 +46,7 @@ $result = $mysqli->query('SELECT * FROM crud');
 </table>
 
 <div class="botao">
-    <a href="criar.php"><button style="width: 200px; height: 35px" border-radius="20px">Adicionar Novo Úsuario</button></a>
+    <a href="criar.php"><button style="width: 200px; height: 35px">Adicionar Novo Úsuario</button></a>
 </div>
     
 </body>
