@@ -1,0 +1,29 @@
+body{
+    background-color: yellowgreen;
+}
+
+.container{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    border: 1px;
+}
+
+.nome{
+    margin-bottom: 10px;
+}
+
+.email{
+    margin-bottom: 5px;
+}
+
+.formulario{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    border: 1px;
+}
+
+.botao{
+    margin-top: 15px;
+}
