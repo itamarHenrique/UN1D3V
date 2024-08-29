@@ -1,5 +1,5 @@
 body{
-    background-color: yellowgreen;
+    background-color: #F0F0F0;
 }
 
 .container{
@@ -26,4 +26,14 @@ body{
 
 .botao{
     margin-top: 15px;
+}
+
+.container2{
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+
 }
