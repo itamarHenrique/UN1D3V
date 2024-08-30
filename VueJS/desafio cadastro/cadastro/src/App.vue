@@ -1,88 +1,217 @@
 <template>
-
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>{{ textoInicio }}</h1>
+    <div class="header">
+      <h1>{{ textoInicio }}</h1>
+      <hr class="divisao">
+    </div>
+    <div class="form-section">
+      <div class="form-grupo">
+        <h4>{{ textoPadraoTime }}</h4>
+        <input type="text" id="nomeTime" v-model="nomeTime">
+        <!-- <CardInput></CardInput> -->
+      </div>
+      <div class="form-grupo-lista">
+        <div class="form-grupo">
+          <h4>{{ textoPadraoNome }}</h4>
+          <input type="text" id="nomeJogador" v-model="nomeJogador">
+          <!-- <InputJogador></InputJogador> -->
+        </div>
+        <div class="form-grupo">
+          <h4>{{ textoCPF }}</h4>
+          <input type="text" id="cpfJogador" v-model="cpfJogador">
+          <!-- <InputCpf></InputCpf> -->
+        </div>
+        <div class="form-grupo botao">
+          <button v-on:click="Addjogador" type="submit" class="btn-small-submit">Cadastrar jogadores</button>
+        </div>
       </div>
     </div>
+    <div class="list-section">
+      <h3>Lista de jogadores</h3>
+      <hr class="divisao">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Nome</th> 
+            <th scope="col">Time</th>
+            <th scope="col">cpf</th>
+            <hr class="divisao">
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="jogador in jogadores">
+            <td>{{ jogador.nomeTime }}</td>
+            <td>{{ jogador.nomeJogador }}</td>
+            <td>{{ jogador.cpfJogador }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  
 </template>
 
 <script>
+import CardInput from './components/CardInput.vue';
+import InputCpf from './components/InputCpf.vue';
+import InputJogador from './components/InputJogador.vue';
 
 export default{
   components: {
+    CardInput,
+    InputJogador,
+    InputCpf
 
   },
 
   data(){
     return{
 
-      textoInicio: 'Bem-vindo ao gestor da SuperLiga'
+      textoInicio: 'Bem-vindo ao gestor da SuperLiga',
+      textoPadraoTime: 'Qual o nome do time?',
+      textoPadraoNome: 'Nome do jogador',
+      textoCPF: 'CPF',
 
+      jogadores: [ ],
+      nomeTime: "",
+      nomeJogador: "",
+      cpfJogador: ""
     }
   },
+
   methods:{
-  validaCPF(cpf) {
-    var Soma = 0
-    var Resto
+  // validaCPF(cpf) {
+  //   var Soma = 0
+  //   var Resto
 
-    var strCPF = String(cpf).replace(/[^\d]/g, '')
+  //   var strCPF = String(cpf).replace(/[^\d]/g, '')
     
-    if (strCPF.length !== 11)
-      return false
+  //   if (strCPF.length !== 11)
+  //     return false
     
-    if ([
-      '00000000000',
-      '11111111111',
-      '22222222222',
-      '33333333333',
-      '44444444444',
-      '55555555555',
-      '66666666666',
-      '77777777777',
-      '88888888888',
-      '99999999999',
-      ].indexOf(strCPF) !== -1)
-      return false
+  //   if ([
+  //     '00000000000',
+  //     '11111111111',
+  //     '22222222222',
+  //     '33333333333',
+  //     '44444444444',
+  //     '55555555555',
+  //     '66666666666',
+  //     '77777777777',
+  //     '88888888888',
+  //     '99999999999',
+  //     ].indexOf(strCPF) !== -1)
+  //     return false
 
-    for (i=1; i<=9; i++)
-      Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  //   for (i=1; i<=9; i++)
+  //     Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
 
-    Resto = (Soma * 10) % 11
+  //   Resto = (Soma * 10) % 11
 
-    if ((Resto == 10) || (Resto == 11)) 
-      Resto = 0
+  //   if ((Resto == 10) || (Resto == 11)) 
+  //     Resto = 0
 
-    if (Resto != parseInt(strCPF.substring(9, 10)) )
-      return false
+  //   if (Resto != parseInt(strCPF.substring(9, 10)) )
+  //     return false
 
-    Soma = 0
+  //   Soma = 0
 
-    for (i = 1; i <= 10; i++)
-      Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i)
+  //   for (i = 1; i <= 10; i++)
+  //     Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i)
 
-    Resto = (Soma * 10) % 11
+  //   Resto = (Soma * 10) % 11
 
-    if ((Resto == 10) || (Resto == 11)) 
-      Resto = 0
+  //   if ((Resto == 10) || (Resto == 11)) 
+  //     Resto = 0
 
-    if (Resto != parseInt(strCPF.substring(10, 11) ) )
-      return false
+  //   if (Resto != parseInt(strCPF.substring(10, 11) ) )
+  //     return false
 
-    return true
+  //   return true
+  // },
+
+  Addjogador(){
+        this.jogadores.push({
+          nomeTime: this.nomeTime,
+          nomeJogador: this.nomeJogador,
+          cpfJogador: this.cpfJogador
+        }
+        )
+        this.nomeTime = '';
+        this.nomeJogador = '';
+        this.cpfJogador = '';
+     }
   }
 
-
-
-  }
 }
 
 </script>
 
 <style scoped>
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.divisao {
+  margin: 10px 0;
+  border: 1px solid #ddd;
+}
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+.form-grupo {
+  margin-bottom: 15px;
+}
+
+.form-grupo h4 {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-grupo-lista {
+  display: flex;
+  align-items: flex-end; /* Alinha os elementos ao final */
+  justify-content: space-between;
+}
+
+.form-grupo-lista .form-grupo {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-grupo-lista .botao {
+  margin-right: 0;
+}
+
+.btn-small-submit {
+  padding: 5px 10px; 
+  font-size: 14px;  
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white; 
+  border: none; 
+  cursor: pointer;
+}
+
+input{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #000;
+}
 
 
 </style>
