@@ -74,9 +74,17 @@ components: {
   },
 
   methods: {
+
+    formatarCPF(cpf) {
+    if (!cpf) return '';
+    cpf = cpf.replace(/\D/g, ''); // Remove tudo que não é dígito
+    cpf = cpf.padStart(11, '0'); // Garante que tenha 11 dígitos
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  },
+
     validaTamanho() {
       console.log(`Validação: nomeTime = "${this.nomeTime}", nomeJogador = "${this.nomeJogador}"`);
-      if (this.nomeTime.length < 3 || this.nomeJogador.length < 2) {
+      if (this.nomeTime.length < 3 || this.nomeJogador.length < 2 ||  this.cpfJogador.length != 11) {
         return false;
       }
       return true; 
@@ -84,14 +92,14 @@ components: {
     
     Addjogador() {
       if (!this.validaTamanho()) {
-        alert("Erro: O nome do time deve ter pelo menos 3 caracteres e o nome do jogador pelo menos 2 caracteres.");
+        alert("Erro: O nome do time deve ter pelo menos 3 caracteres, o nome do jogador deve ter pelo menos 2 caracteres e o cpf tem que ter 11 caracteres.");
         return; 
       }
 
       this.jogadores.push({
         nomeTime: this.nomeTime,
         nomeJogador: this.nomeJogador,
-        cpfJogador: this.cpfJogador
+        cpfJogador: this.formatarCPF(this.cpfJogador)
       });
 
       this.nomeTime = '';
