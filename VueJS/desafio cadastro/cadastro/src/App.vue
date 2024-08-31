@@ -22,6 +22,9 @@
           <button v-on:click="Addjogador" type="submit" class="btn-small-submit">Cadastrar jogadores</button>
         </div>
       </div>
+      <div v-if="mensagemErro" class="error-message">
+        {{ mensagemErro }}
+      </div>
     </div>
     <div class="list-section">
       <h3>Lista de jogadores</h3>
@@ -36,9 +39,12 @@
           </tr>
         </thead>
         <tbody>
+          <div v-if="mensagemCadastro" class="error-message">
+            {{ mensagemCadastro }}
+          </div>
           <tr v-for="jogador in jogadores">
-            <td>{{ jogador.nomeTime }}</td>
             <td>{{ jogador.nomeJogador }}</td>
+            <td>{{ jogador.nomeTime }}</td>
             <td>{{ jogador.cpfJogador }}</td>
           </tr>
         </tbody>
@@ -48,17 +54,8 @@
 </template>
 
 <script>
-import CardInput from './components/CardInput.vue';
-import InputCpf from './components/InputCpf.vue';
-import InputJogador from './components/InputJogador.vue';
 
 export default {
-components: {
-    CardInput,
-    InputJogador,
-    InputCpf
-  },
-
   data() {
     return {
       textoInicio: 'Bem-vindo ao gestor da SuperLiga',
@@ -69,31 +66,63 @@ components: {
       jogadores: [],
       nomeTime: "",
       nomeJogador: "",
-      cpfJogador: ""
+      cpfJogador: "",
+      mensagemErro: "",
+      mensagemCadastro: ''
     };
   },
 
-  methods: {
-
-    formatarCPF(cpf) {
-    if (!cpf) return '';
-    cpf = cpf.replace(/\D/g, ''); // Remove tudo que não é dígito
-    cpf = cpf.padStart(11, '0'); // Garante que tenha 11 dígitos
-    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  mounted() {
+    this.validandoJogadoresCadastrados();
   },
 
+  methods: {
+    formatarCPF(cpf) {
+      if (!cpf) return '';
+      cpf = cpf.replace(/\D/g, ''); // Remove tudo que não é dígito
+      cpf = cpf.padStart(11, '0'); // Garante que tenha 11 dígitos
+      return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    },
+
     validaTamanho() {
-      console.log(`Validação: nomeTime = "${this.nomeTime}", nomeJogador = "${this.nomeJogador}"`);
       if (this.nomeTime.length < 3 || this.nomeJogador.length < 2 ||  this.cpfJogador.length != 11) {
         return false;
       }
       return true; 
     },
-    
+
+    validarTimeCom5Jogadores() {
+      const jogadoresDoTime = this.jogadores.filter(jogador => jogador.nomeTime === this.nomeTime);
+      if (jogadoresDoTime.length >= 5) {
+        this.mensagemErro = `Erro: O time "${this.nomeTime}" já possui 5 jogadores cadastrados.`;
+        return false;
+      }
+      this.mensagemErro = '';
+      return true;
+    },
+
+    validandoJogadoresCadastrados(){
+      if(this.jogadores.length == 0){
+        this.mensagemCadastro = 'Ops: Ainda não há jogadores cadastrados';
+      } else {
+        this.mensagemCadastro = '';
+      }
+    },
+
+    limparCampos() {
+      this.nomeTime = '';
+      this.nomeJogador = '';
+      this.cpfJogador = '';
+    },
+
     Addjogador() {
       if (!this.validaTamanho()) {
-        alert("Erro: O nome do time deve ter pelo menos 3 caracteres, o nome do jogador deve ter pelo menos 2 caracteres e o cpf tem que ter 11 caracteres.");
-        return; 
+        this.mensagemErro = "Erro: O nome do time deve ter pelo menos 3 caracteres, o nome do jogador deve ter pelo menos 2 caracteres e o CPF tem que ter 11 caracteres.";
+        return;
+      }
+
+      if (!this.validarTimeCom5Jogadores()) {
+        return;
       }
 
       this.jogadores.push({
@@ -102,12 +131,10 @@ components: {
         cpfJogador: this.formatarCPF(this.cpfJogador)
       });
 
-      this.nomeTime = '';
-      this.nomeJogador = '';
-      this.cpfJogador = '';
+      this.validandoJogadoresCadastrados(); // Chama a validação após adicionar um jogador
+      this.limparCampos();
     }
   }
-
 };
 
 </script>
