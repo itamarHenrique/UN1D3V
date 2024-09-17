@@ -52,7 +52,6 @@ export default {
   },
   watch: {
     episodioSelecionado(newVal) {
-      // Chama a função quando episodioSelecionado muda
       console.log('Watcher ativado. Episódio selecionado:', newVal);
       this.carregaDetalhesEpisodio();
     }
@@ -73,7 +72,6 @@ export default {
     carregaDetalhesEpisodio() {
       console.log('Função carregaDetalhesEpisodio chamada');
 
-      // Verifica se episodioSelecionado não está vazio ou nulo
       if (!this.episodioSelecionado) {
         console.warn('Nenhum episódio selecionado');
         return;
@@ -120,7 +118,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Adicione seus estilos aqui, se necessário */
-</style>
