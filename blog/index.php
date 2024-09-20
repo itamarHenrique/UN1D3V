@@ -6,7 +6,18 @@ require './conexao/conexao.php';
 include './funcao/funcaoGlobal.php';
 include './funcao/funcaoCadastro.php';
 
-if(verificaMetodoPost()){
+if(isset($_POST['email'])){
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+
+    $result = $mysqli->query("SELECT * FROM usuario WHERE email = '$email'");
+    
+    $usuario = $result->fetch_assoc();
+    if(password_verify($senha, $usuario['senha'])){
+        echo 'Usuario logado.';
+    }else{
+        echo 'Falha ao logar';
+    }
 }
 
 

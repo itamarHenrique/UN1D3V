@@ -12,6 +12,7 @@ function validandoEntrada($informacao){
 
 function validarSenha($senha){
     if(!empty(trim($senha)) && strlen($senha) > 5 && strlen($senha) < 20){
+        $senha = password_hash($senha, PASSWORD_DEFAULT);
         return $senha;
     }
 
