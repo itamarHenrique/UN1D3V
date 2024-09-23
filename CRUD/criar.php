@@ -22,7 +22,6 @@ if(verificaMetodoPost()){
         }
         $statement->close();
     }catch(Exception $error){
-        //echo "Erro: " . $error->getMessage();
         $erro = $error->getMessage();
 
     }
