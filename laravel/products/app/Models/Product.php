@@ -111,6 +111,10 @@ class Product extends Model
     public function getByCategory(string $category = null, string $palavraChave = null){
         $collection = collect($this->products);
 
+        if($category === null && ($palavraChave === null || $palavraChave === "")){
+            return response()->json(['mensagem' => 'Forneça uma categoria ou palavra chave.'], 400);
+        }
+
         $categoria = $collection->filter(function($product) use ($category, $palavraChave){
             $categoriaExiste = $category ? in_array($category, $product['categorias']) : true;
 

@@ -8,7 +8,6 @@ Route::get('/', function () {
 });
 
 Route::get('/produtos/categorias/{category?}', [ProductsController::class,'getByCategory']);
-Route::get('/produtos/categorias', [ProductsController::class,'getByCategory']);
 Route::get('/produtos', [ProductsController::class, 'getAll']);
 Route::get('/produtos/estoque-baixo', [ProductsController::class,'getWithLowStock']);
 Route::get('/categorias', [ProductsController::class,'getCategories']);
