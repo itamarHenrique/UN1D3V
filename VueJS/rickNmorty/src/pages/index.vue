@@ -21,8 +21,9 @@
           </v-avatar>
 
           <v-list-item-title>{{ personagem.name }}</v-list-item-title>
-          <v-list-item-subtitle>Last known location: {{ personagem.location.name }}</v-list-item-subtitle>
+          <v-list-item-subtitle>Status: {{ personagem.status }}</v-list-item-subtitle>
           <v-list-item-subtitle>First seen in: {{ personagem.episode[0] }}</v-list-item-subtitle>
+          <v-list-item-subtitle>Last known location: {{ personagem.location.name }}</v-list-item-subtitle>
         </v-list-item>
       </v-list>
     </v-card>
