@@ -116,7 +116,12 @@ class Product extends Model
         }
 
         $categoria = $collection->filter(function($product) use ($category, $palavraChave){
-            $categoriaExiste = $category ? in_array($category, $product['categorias']) : true;
+
+            if($category !== null){
+                $categoriaExiste = in_array($category, $product['categorias']);
+            }else{
+                $categoriaExiste = true;
+            }
 
             if($palavraChave !== null && $palavraChave !== ''){
                 $palavraExiste = strpos($product['nome'], $palavraChave) !== false || in_array($palavraChave, $product['categorias']);
