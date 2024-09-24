@@ -89,7 +89,11 @@ class Product extends Model
 
     public function getAll(){
 
-        return $this->products;
+        $produtos = collect($this->products);
+
+        $produtos->groupBy("id");
+
+        return $produtos->all();
 
     }
 
