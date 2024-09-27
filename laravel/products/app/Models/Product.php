@@ -99,6 +99,13 @@ class Product extends Model
 
     public function getById(int $id){
 
+        $primeiroId = min(array_column($this->products, 'id'));
+        $ultimoId = max(array_column($this->products, 'id'));
+
+        if($id > $ultimoId || $id < $primeiroId){
+            return response()->json(['mensagem' => 'ID invalido.'], 404);
+        }
+
         $collection = collect( $this->products)->where("id" , $id);
 
         return $collection;
@@ -116,7 +123,7 @@ class Product extends Model
         $collection = collect($this->products);
 
         if($category === null && ($palavraChave === null || $palavraChave === "")){
-            return response()->json(['mensagem' => 'Forneça uma categoria ou palavra chave.'], 400);
+            return response()->json(['mensagem' => 'Forneça uma categoria ou palavra chave.'], 400); //To em duvida se seria o erro 404 ou erro 400.
         }
 
         $categoria = $collection->filter(function($product) use ($category, $palavraChave){
