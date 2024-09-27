@@ -99,8 +99,12 @@ class Product extends Model
 
     public function getById(int $id){
 
-        $primeiroId = min(array_column($this->products, 'id'));
-        $ultimoId = max(array_column($this->products, 'id'));
+        // $primeiroId = min(array_column($this->products, 'id'));
+        // $ultimoId = max(array_column($this->products, 'id'));
+
+        $ultimoId = collect($this->products)->max('id');
+
+        $primeiroId = collect($this->products)->min('id');
 
         if($id > $ultimoId || $id < $primeiroId){
             return response()->json(['mensagem' => 'ID invalido.'], 404);
