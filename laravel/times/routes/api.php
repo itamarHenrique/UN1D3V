@@ -10,7 +10,13 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/times', [TeamController::class, 'getAll']);
-
 Route::post('/times', [TeamController::class, 'createTeam']);
+Route::put('/times/{id}', [TeamController::class,'updateTeam']);
+
 
 Route::get('/times/sem-jogadores', [TeamController::class, 'getWithoutPlayers']);
+
+
+Route::get('/times/{id}', [TeamController::class,'getById']);
+
+Route::delete('/times/{id}', [TeamController::class,'deleteTeam']);
