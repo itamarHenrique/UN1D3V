@@ -78,7 +78,14 @@ class Team extends Model
 public function deleteTeam($id){
     $teams = collect($this->getAll());
 
-    $team = $teams->Where('id', $id);
+    $team = $teams->Where('id', $id)->delete();
+
+    if(isset($team)){
+        unset($team);
+        return true;
+    }
+
+    return false;
 }
 
 

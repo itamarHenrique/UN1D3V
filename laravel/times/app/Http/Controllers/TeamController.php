@@ -38,7 +38,6 @@ class TeamController extends Controller
 
     public function createTeam(createTeamRequest $request)
     {
-        // $this->team->createTeam($this->request->all());
 
         $teams = $this->team->getAll();
 
@@ -75,6 +74,18 @@ class TeamController extends Controller
     } catch (\Exception $e) {
         return response()->json(["error" => "Erro ao atualizar o time: " . $e->getMessage()], 500);
     }
+}
+
+public function deleteTeam($id){
+
+    $teams = $this->team->getById($id);
+
+    if($this->team->deleteTeam($teams)){
+        return response()->json(["message" => "Time removido com sucesso"], 200);
+    }
+
+    return response()->json(["message" => "Time não encontrado"], 404);
+
 }
 
 
