@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\createTeamRequest;
+use App\Http\Requests\updateTeamRequest;
 use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -57,10 +58,10 @@ class TeamController extends Controller
         return $this->team->getWithoutPlayers();
     }
 
-    public function updateTeam($id)
+    public function updateTeam($id, updateTeamRequest $updateTeamRequest)
 {
     try {
-        $data = $this->request->all();
+        $data = $updateTeamRequest->validated();
         $team = $this->team->updateTeam($id, $data);
 
         if (!$team) {

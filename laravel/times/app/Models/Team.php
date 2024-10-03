@@ -53,24 +53,14 @@ class Team extends Model
 {
     $teams = collect($this->getAll());
 
-    $team = $teams->firstWhere('id', $id);
-
-    if (!$team) {
-        return false;
-    }
-
-
-    $team = array_merge($team, $updatedTeam);
-
-    $teams = $teams->reject(function ($team) use ($id){
-        return $team['id'] === $id;
-    })->push($team);
-
-
-        if(Storage::put($this->path, json_encode($teams))){
+    foreach($teams as $key => $team){
+        if($team['id'] == $id){
+            $teams[$key] = array_merge($team, $updatedTeam);
+            Storage::put($this->path, json_encode($teams));
             return $team;
-        };
 
+        }
+    }
 
     return false;
 }
