@@ -78,10 +78,12 @@ class Team extends Model
 public function deleteTeam($id){
     $teams = collect($this->getAll());
 
-    $team = $teams->Where('id', $id)->delete();
+    $team = $teams->search(fn($team) => $team['id'] == $id);
 
-    if(isset($team)){
-        unset($team);
+    if($team !== false){
+        $teams->forget($team);
+
+        Storage::put($this->path, json_encode($teams));
         return true;
     }
 

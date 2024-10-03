@@ -22,12 +22,12 @@ class createTeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:30', 'min:3'],
-            'foundation_date' => ['required'],
             'id' => ['required'],
+            'name' => ['required', 'string', 'max:30', 'min:3'],
             'players' => ['array', 'max:3'],
             'players.*.name' => 'required|min:3|max:30',
-            'players.*.position' => 'required'
+            'players.*.position' => 'required',
+            'foundation_date' => ['required']
         ];
     }
 }

@@ -78,9 +78,7 @@ class TeamController extends Controller
 
 public function deleteTeam($id){
 
-    $teams = $this->team->getById($id);
-
-    if($this->team->deleteTeam($teams)){
+    if($this->team->deleteTeam($id)){
         return response()->json(["message" => "Time removido com sucesso"], 200);
     }
 
