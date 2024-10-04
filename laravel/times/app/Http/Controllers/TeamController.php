@@ -7,6 +7,7 @@ use App\Http\Requests\updateTeamRequest;
 use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -63,6 +64,8 @@ class TeamController extends Controller
     try {
         $data = $updateTeamRequest->validated();
         $team = $this->team->updateTeam($id, $data);
+        // Log::info("Dados recebidos da requisição: ", ['dados' => $data]);
+        // Log::info("Dados recebidos da função: ", ['dados' => $team]);
 
         if (!$team) {
             return response()->json(["message" => "Time não encontrado."], 404);
