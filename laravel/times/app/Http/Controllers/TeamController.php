@@ -44,6 +44,7 @@ class TeamController extends Controller
         $teams = $this->team->getAll();
 
         $data = array_merge($request->validated(), ['registration_date' => Carbon::now()->format('Y-m-d h:i:s')]);
+
         $teams[] = $data;
 
         if(Storage::put('db/teams.txt', json_encode($teams))){

@@ -35,7 +35,7 @@ class Team extends Model
 
 
         if (Storage::put($this->path, json_encode($teams))) {
-            return $request->valideted();
+            return $request->validated();
         }
 
         return false;
@@ -58,9 +58,9 @@ class Team extends Model
     foreach($teams as $key => $team){
         if($team['id'] == $id){
             $teams[$key] = array_merge($team, $updatedTeam);
-            Log::info("Dados do team: ", ['dados' => $team]);
+            // Log::info("Dados do team: ", ['dados' => $team]);
             Storage::put($this->path, json_encode($teams));
-            Log::info('Dados recebidos do array:', ['key' => $teams[$key]]);
+            // Log::info('Dados recebidos do array:', ['key' => $teams[$key]]);
 
             return $team;
 
