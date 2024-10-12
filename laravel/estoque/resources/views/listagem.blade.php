@@ -12,13 +12,14 @@
             <th>Nome</th>
             <th>Descrição</th>
             <th>Preço</th>
+            <th>Ação</th>
         </tr>
         @foreach ($products as $product)
         <tr>
             <td>{{ $product->nome }}</td>
             <td>{{ $product->descricao }}</td>
             <td>{{ $product->preco }}</td>
-            <td><a href="/products/show?id={{ $product->id }}"><button class="btn btn-light">Visualizar</button></a></td>
+            <td><a href="/api/products/show?id={{ $product->id }}"><button class="btn btn-light">Visualizar</button></a></td>
         </tr>
         @endforeach
     </table>
