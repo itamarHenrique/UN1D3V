@@ -28,9 +28,8 @@ class ProductController extends Controller
         return view('listagem')->with('products', $products);
     }
 
-    public function show()
+    public function show($id)
     {
-        $id = $this->request->input('id', '0');
 
         $products = $this->product->getById($id);
 

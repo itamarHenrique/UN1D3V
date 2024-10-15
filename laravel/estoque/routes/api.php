@@ -12,6 +12,6 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/products', [ProductController::class, 'index']);
 
-Route::get('/products/show', [ProductController::class, 'show']);
+Route::get('/products/show/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+');
 
 Route::post('/products', [ProductController::class, 'store']);
