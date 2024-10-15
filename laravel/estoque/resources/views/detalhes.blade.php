@@ -1,4 +1,4 @@
-@extends('principal')
+@extends('layout.principal')
 @section('conteudo')
         <div class="container">
             <h1>Detalhes do produto: {{$product->nome}}</h1>
