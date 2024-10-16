@@ -5,7 +5,7 @@
 
         <ul>
             <li>
-                <b>Valor: </b> R$ {{$product->preco}}
+                <b>Valor: </b> R$ {{number_format($product->preco, 2, ',', '.')}}
             </li>
             <li>
                 <b>Descrição: </b> {{$product->descricao ?? 'Nenhuma descrição informada'}}

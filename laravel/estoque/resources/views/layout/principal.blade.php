@@ -15,6 +15,7 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/api/products">Listagem</a>
+                    <a class="navbar-brand" href="/api/products/adiciona">Adicionar</a>
                 </div>
             </div>
           </nav>

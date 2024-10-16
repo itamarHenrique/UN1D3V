@@ -12,3 +12,8 @@ nav.navbar.navbar-default{
 .container{
     margin-bottom: 25px;
 }
+
+
+.btn.btn-primary.btn-block{
+    margin-top: 10px;
+}

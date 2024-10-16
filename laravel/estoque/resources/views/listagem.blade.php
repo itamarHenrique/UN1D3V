@@ -9,6 +9,7 @@
         </div>
 
         @else
+
         <h1>Listagem de produtos</h1>
         <table class='table table-hover table-bordered'>
         <tr>
@@ -20,11 +21,17 @@
             @foreach ($products as $product)
             <tr>
                 <td>{{ $product->nome }}</td>
-                <td>{{ $product->descricao }}</td>
-                <td>R${{ $product->preco }}</td>
+                <td>{{ $product->descricao ?? 'Nenhuma descrição adicionada' }}</td>
+                <td>R${{ number_format($product->preco, 2, ',', '.')}}</td>
                 <td><a href="/api/products/show/{{ $product->id }}"><button class="btn btn-light">Visualizar</button></a></td>
             </tr>
             @endforeach
         </table>
     @endif
+
+
+    <div class="alert alert-success">
+        <strong>Sucesso!</strong> <br>
+        O {{ $product->nome }} foi adicionado
+    </div>
 @stop

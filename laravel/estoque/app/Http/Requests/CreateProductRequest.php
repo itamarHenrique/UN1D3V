@@ -23,7 +23,7 @@ class CreateProductRequest extends FormRequest
     {
         return [
             'nome' => 'required',
-            'descricao' => 'required',
+            'descricao' => 'sometimes',
             'preco' => 'required'
         ];
     }

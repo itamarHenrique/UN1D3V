@@ -14,4 +14,6 @@ Route::get('/products', [ProductController::class, 'index']);
 
 Route::get('/products/show/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+');
 
-Route::post('/products', [ProductController::class, 'store']);
+Route::post('/products/adiciona', [ProductController::class, 'store']);
+
+Route::get('/products/adiciona', [ProductController::class, 'adiciona']);

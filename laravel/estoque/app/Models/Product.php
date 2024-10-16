@@ -22,4 +22,14 @@ class Product extends Model
     public function getAll(){
         return DB::select('SELECT * FROM products');
     }
+
+    public function createProduct($data){
+        return DB::table('products')->insert([
+            'nome' => $data['nome'],
+            'descricao' => $data['descricao'],
+            'preco' => $data['preco'],
+            'created_at' => now('UTC'),
+            'updated_at' => now('UTC')
+        ]);
+    }
 }

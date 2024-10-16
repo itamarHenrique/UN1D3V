@@ -48,9 +48,19 @@ class ProductController extends Controller
     {
         $data = $request->only(['nome', 'descricao', 'preco']);
 
-        $product = $this->product->create($data);
+        $this->product->createProduct($data);
 
-        return $product;
+        return redirect('/api/products');
+    }
+
+    public function adiciona()
+    {
+        return view('formulario');
+    }
+
+    public function apagar()
+    {
+
     }
 
 }
