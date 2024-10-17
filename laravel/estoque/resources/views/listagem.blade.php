@@ -10,6 +10,13 @@
 
         @else
 
+        @if(session('success'))
+            <div class="container">
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            </div>
+        @endif
         <h1>Listagem de produtos</h1>
         <table class='table table-hover table-bordered'>
         <tr>
@@ -29,9 +36,9 @@
         </table>
     @endif
 
-
-    <div class="alert alert-success">
-        <strong>Sucesso!</strong> <br>
-        O {{ $product->nome }} foi adicionado
+    <div class="d-flex justify-content-center">
+        {{ $products->links('pagination::bootstrap-4') }}
     </div>
+
+
 @stop

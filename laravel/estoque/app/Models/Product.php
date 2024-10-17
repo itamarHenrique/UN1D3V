@@ -20,7 +20,7 @@ class Product extends Model
     }
 
     public function getAll(){
-        return DB::select('SELECT * FROM products');
+        return DB::table('products')->paginate(10);
     }
 
     public function createProduct($data){

@@ -50,6 +50,10 @@ class ProductController extends Controller
 
         $this->product->createProduct($data);
 
+        session()->flash('success', 'O produto foi gravado com sucesso');
+
+        // dd(session()->all());
+
         return redirect('/api/products');
     }
 
