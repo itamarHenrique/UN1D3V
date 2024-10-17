@@ -32,4 +32,8 @@ class Product extends Model
             'updated_at' => now('UTC')
         ]);
     }
+
+    public function deleteByID($id){
+        return DB::delete('DELETE FROM products WHERE id = ?', [$id]);
+    }
 }

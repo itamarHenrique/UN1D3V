@@ -62,8 +62,16 @@ class ProductController extends Controller
         return view('formulario');
     }
 
-    public function apagar()
+    public function deleteById($id)
     {
+        $deletado = $this->product->deleteByID($id);
+
+        if($deletado){
+            return redirect('/api/products')->with('success', 'Produto removido com sucesso.');
+        }
+
+        return redirect('/api/products')->with('error', 'Erro ao deletar o produto.');
+
 
     }
 

@@ -17,3 +17,5 @@ Route::get('/products/show/{id}', [ProductController::class, 'show'])->where('id
 Route::post('/products/adiciona', [ProductController::class, 'store']);
 
 Route::get('/products/adiciona', [ProductController::class, 'adiciona']);
+
+Route::delete('/products/delete/{id}', [ProductController::class, 'deleteById']);
