@@ -12,5 +12,7 @@
             </li>
         </ul>
 
+        <a href="/api/products"><button class="btn btn-secondary">Voltar</button></a>
+
         </div>
 @stop

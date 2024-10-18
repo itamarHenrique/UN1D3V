@@ -30,13 +30,16 @@
                 <td>{{ $product->nome }}</td>
                 <td>{{ $product->descricao ?? 'Nenhuma descrição adicionada' }}</td>
                 <td>R${{ number_format($product->preco, 2, ',', '.')}}</td>
-                <td><a href="/api/products/show/{{ $product->id }}"><button class="btn btn-light">Visualizar</button></a></td>
                 <td>
-                    <form action="/api/products/delete/{{ $product->id }}" method="POST">
-                        @method('DELETE')
-                        <button class="btn btn-danger">Apagar</button>
-                    </form>
+                    <div class="d-flex">
+                        <a href="/api/products/show/{{ $product->id }}" class="me-1"><button class="btn btn-light">Visualizar</button></a>
+                        <form action="/api/products/delete/{{ $product->id }}" method="POST">
+                            @method('DELETE')
+                            <button class="btn btn-danger">Apagar</button>
+                        </form>
+                    </div>
                 </td>
+
             </tr>
             @endforeach
         </table>

@@ -52,8 +52,6 @@ class ProductController extends Controller
 
         session()->flash('success', 'O produto foi gravado com sucesso');
 
-        // dd(session()->all());
-
         return redirect('/api/products');
     }
 
