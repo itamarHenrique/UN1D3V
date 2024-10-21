@@ -8,6 +8,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::prefix('/medico', function(){
-    Route::get('/', [HospitalController::class, 'index']);
-})
+// Route::prefix('/medico', function(){
+//     Route::get('/', [HospitalController::class, 'index']);
+// })

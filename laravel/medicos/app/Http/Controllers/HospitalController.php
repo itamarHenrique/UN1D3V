@@ -17,6 +17,10 @@ class HospitalController extends Controller
     {
         $hospital = $this->hospital->all();
 
-        // return Hospital
+        return Hospital
+    }
+
+    public function show(){
+        return $hospital;
     }
 }
