@@ -20,12 +20,12 @@ class Medico extends Model
 
     public function especialidade()
     {
-        return $this->belongsTo(Especialidade::class, 'especialidades_id');
+        return $this->belongsTo(Especialidade::class, 'especialidade_id', 'id');
     }
 
     public function hospital()
     {
-        return $this->belongsTo(Hospital::class);
+        return $this->belongsTo(Hospital::class, 'hospital_id');
     }
 
 }

@@ -18,6 +18,7 @@ class HospitalController extends Controller
     {
         $hospitais = $this->hospital->all();
 
+
         return HospitalResource::collection($hospitais);
     }
 

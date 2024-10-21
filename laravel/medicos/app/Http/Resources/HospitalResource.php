@@ -16,10 +16,10 @@ class HospitalResource extends JsonResource
     {
         return [
             'hospital' => $this->hospital,
-            'medicos' => $this->medicos ? $this->medicos->map(function ($medico) {
+            'medicos' => $this->medico->map(function ($medico) {
                 return ['nome' => $medico->nome,
-                        'especialidade' => $medico->especialidade ? $medico->especialidade->nome : "Especialidade não definida"];
-            }) : []
+                        'especialidade' => $medico->especialidade->especialidade];
+            })
         ];
 
     }

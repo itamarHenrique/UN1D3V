@@ -15,7 +15,7 @@ Route::prefix('hospital')->group(function (){
     Route::get('/{hospital}', [HospitalController::class, 'show']);
 });
 
-Route::prefix('especialidades')->group(function (){
+Route::prefix('especialidade')->group(function (){
     Route::get('/', [EspecialidadeController::class, 'index']);
     Route::get('/{especialidade}', [EspecialidadeController::class, 'show']);
 });
