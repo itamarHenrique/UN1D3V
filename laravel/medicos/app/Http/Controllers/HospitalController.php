@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\HospitalResource;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,12 @@ class HospitalController extends Controller
 
     public function index(Request $request)
     {
-        $hospital = $this->hospital->all();
+        $hospitais = $this->hospital->all();
 
-        return Hospital
+        return HospitalResource::collection($hospitais);
     }
 
-    public function show(){
+    public function show(Hospital $hospital){
         return $hospital;
     }
 }

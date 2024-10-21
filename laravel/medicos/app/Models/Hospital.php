@@ -18,6 +18,11 @@ class Hospital extends Model
     protected $table = "hospital";
 
     public function hospital(){
-        return $this->hasMany(Medico::class);
+        return $this->hasMany(Medico::class, 'hospital_id');
+    }
+
+    public function especialidade()
+    {
+        return $this->belongsTo(Especialidade::class);
     }
 }

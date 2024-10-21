@@ -15,10 +15,12 @@ class HospitalResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'hospital' => $this->nome,
-            'medicos' => $this->medico->map(function ($medico){
-                return ['nome' => $medico->nome, 'especialidade' => $medico->especialidade->nome];
-            })
+            'hospital' => $this->hospital,
+            'medicos' => $this->medicos ? $this->medicos->map(function ($medico) {
+                return ['nome' => $medico->nome,
+                        'especialidade' => $medico->especialidade ? $medico->especialidade->nome : "Especialidade não definida"];
+            }) : []
         ];
+
     }
 }

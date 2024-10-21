@@ -23,6 +23,6 @@ class EspecialidadeController extends Controller
 
     public function show(Especialidade $especialidade)
     {
-        return $especialidade
+        return $especialidade;
     }
 }
