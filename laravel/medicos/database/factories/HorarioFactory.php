@@ -19,7 +19,7 @@ class HorarioFactory extends Factory
     {
         return [
             'medico_id' => Medico::inRandomOrder()->first(),
-            'horario' => $this->faker->time()
+            'horario' => $this->faker->dateTime()
         ];
     }
 }

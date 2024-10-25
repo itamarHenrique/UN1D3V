@@ -22,7 +22,7 @@ class AgendamentoFactory extends Factory
             "paciente_id" => Paciente::inRandomOrder()->first(),
             "horario_id" => Horario::inRandomOrder()->first(),
             "descricao" => $this->faker->text(),
-            "status" => $this->faker->text('Sim')
+            "status" => $this->faker->randomElement(['Sim', 'Não'])
         ];
     }
 }

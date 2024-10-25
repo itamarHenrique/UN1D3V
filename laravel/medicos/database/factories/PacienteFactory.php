@@ -18,7 +18,13 @@ class PacienteFactory extends Factory
     {
         return [
             'nome' => $this->faker->name(),
-            'cpf' => $this->faker->cpf()
+            'cpf' => $this->gerarCpf()
         ];
+    }
+
+
+    private function gerarCpf()
+    {
+        return str_pad(rand(0, 99999999999), 11, '0', STR_PAD_LEFT);
     }
 }
