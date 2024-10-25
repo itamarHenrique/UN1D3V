@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Horario;
+use App\Models\Paciente;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class AgendamentoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "paciente_id" => Paciente::inRandomOrder()->first(),
+            "horario_id" => Horario::inRandomOrder()->first(),
+            "descricao" => $this->faker->text(),
+            "status" => $this->faker->text('Sim')
         ];
     }
 }
