@@ -19,7 +19,7 @@ class AgendamentoController extends Controller
     {
         $agendamentos = $this->agendamento->all();
 
-        return AgendamentoResource::colection($agendamentos);
+        return AgendamentoResource::collection($agendamentos);
     }
 
     public function show(Agendamento $agendamento)

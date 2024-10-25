@@ -18,11 +18,11 @@ class Agendamento extends Model
 
     protected $table = "agendamento";
 
-    public function paciente(){
-        return $this->hasMany(Paciente::class, 'paciente_id');
+    public function pacientes(){
+        return $this->belongsTo(Paciente::class, 'paciente_id');
     }
 
     public function horario(){
-        return $this->hasMany(Horario::class, 'horario_id');
+        return $this->belongsTo(Horario::class, 'horario_id');
     }
 }

@@ -16,8 +16,10 @@ class AgendamentoResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'paciente_id' => $this->pacientes->nome,
-            'horario_id' => $this->horario->horario,
+            'paciente_id' => $this->paciente_id,
+            'horario_id' => $this->horario_id,
+            'paciente_nome' => $this->pacientes->nome,
+            'horario' => $this->horario->horario,
             'descricao' => $this->descricao,
             'status' => $this->status,
             'created_at' => $this->created_at,

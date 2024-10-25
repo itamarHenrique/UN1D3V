@@ -16,7 +16,8 @@ class HorarioResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'medico_id' => $this->medico->nome,
+            'medico_id' => $this->medico_id,
+            'medico_nome' => $this->medico->nome,
             'horario' => $this->horario,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

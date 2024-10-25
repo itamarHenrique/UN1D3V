@@ -19,6 +19,6 @@ class Horario extends Model
 
     public function medico()
     {
-        return $this->hasMany(Medico::class, 'medico_id');
+        return $this->belongsTo(Medico::class, 'medico_id');
     }
 }
