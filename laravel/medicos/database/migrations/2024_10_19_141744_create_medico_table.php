@@ -14,8 +14,8 @@ return new class extends Migration
             $table->string('nome', 100);
             $table->timestamps();
 
-            $table->foreign('hospital_id')->references('id')->on('hospital')->onDelete('cascade');
-            $table->foreign('especialidade_id')->references('id')->on('especialidade')->onDelete('cascade');
+            $table->foreign('hospital_id')->references('id')->on('hospital')->onDelete('cascade')->onDelete('cascade');
+            $table->foreign('especialidade_id')->references('id')->on('especialidade')->onDelete('cascade')->onDelete('cascade');
         });
     }
 
