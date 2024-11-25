@@ -12,7 +12,7 @@ class Aluno extends Model
 
     protected $fillable = ['nome_aluno', 'RA','email','unidade_de_ensino'];
 
-    protected $aluno = 'alunos';
+    protected $aluno = 'aluno';
 
     public function getAll()
     {
