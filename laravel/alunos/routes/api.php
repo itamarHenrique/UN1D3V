@@ -15,4 +15,5 @@ Route::prefix('alunos')->group(function(){
     Route::get('/', [AlunosController::class, 'index']);
     Route::get('/{id}', [AlunosController::class, 'getById']);
     Route::post('/', [AlunosController::class, 'createAluno']);
+    Route::delete('/{id}', [AlunosController::class, 'deleteAluno']);
 });

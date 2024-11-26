@@ -35,4 +35,9 @@ class Aluno extends Model
             'unidade_de_ensino' => $data['unidade_de_ensino']
         ]);
     }
+
+    public function deleteAluno($id)
+    {
+        return Aluno::where('id', $id)->delete();
+    }
 }

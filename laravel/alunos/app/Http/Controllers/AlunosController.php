@@ -41,4 +41,9 @@ class AlunosController extends Controller
         return new AlunoResource($alunoCriado);
 
     }
+
+    public function deleteAluno($id)
+    {
+        return $this->aluno->deleteAluno($id);
+    }
 }
