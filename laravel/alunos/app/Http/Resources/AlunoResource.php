@@ -14,6 +14,14 @@ class AlunoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'nome_completo' => "{$this->primeiro_nome} {$this->sobrenome}",
+            'primeiro_nome' => $this->primeiro_nome,
+            'sobrenome' => $this->sobrenome,
+            'email' => $this->email,
+            'RA' => $this->RA,
+            'unidade_de_ensino' => $this->unidade_de_ensino
+        ];
     }
 }
