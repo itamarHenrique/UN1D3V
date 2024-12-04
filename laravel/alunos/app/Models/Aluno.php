@@ -15,29 +15,4 @@ class Aluno extends Model
 
     protected $aluno = 'aluno';
 
-    public function getAll()
-    {
-        return Aluno::all();
-    }
-
-    public function getById($id)
-    {
-        return Aluno::findOrFail($id);
-    }
-
-    public function createAluno($data)
-    {
-        return Aluno::create([
-            'primeiro_nome' => $data['primeiro_nome'],
-            'sobrenome' => $data['sobrenome'],
-            'RA' => $data['RA'],
-            'email' => $data['email'],
-            'unidade_de_ensino' => $data['unidade_de_ensino']
-        ]);
-    }
-
-    public function deleteAluno($id)
-    {
-        return Aluno::where('id', $id)->delete();
-    }
 }

@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AlunoPostRequest;
 use App\Http\Resources\AlunoResource;
 use App\Models\Aluno;
+use App\Services\AlunoService;
 use Illuminate\Http\Request;
 
 class AlunosController extends Controller
 {
     private $aluno;
 
-    public function __construct(Aluno $aluno)
+    public function __construct(AlunoService $alunoService)
     {
-        $this->aluno = $aluno;
+        $this->aluno = $alunoService;
     }
 
     public function index()
