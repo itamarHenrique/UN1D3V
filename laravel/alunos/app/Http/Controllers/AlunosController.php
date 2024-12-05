@@ -42,7 +42,7 @@ class AlunosController extends Controller
         return AlunoResource::collection($aluno);
     }
 
-    public function createAluno(AlunoPostRequest $request, EnderecoPostRequest $enderecoPostRequest)
+    public function createAluno(AlunoPostRequest $request)
     {
         $data = $request->validated();
 
