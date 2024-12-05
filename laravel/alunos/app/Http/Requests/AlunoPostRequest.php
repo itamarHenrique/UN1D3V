@@ -26,7 +26,13 @@ class AlunoPostRequest extends FormRequest
             'sobrenome' => ['required', 'string', 'max:255', 'min:3'],
             'RA' => ['required', 'string', 'max:255', 'min:7', 'unique:alunos,RA'],
             'email' => ['required', 'email', 'max:255', 'min:8', 'unique:alunos,email'],
-            'unidade_de_ensino' => ['required', 'string', 'min:4']
+            'unidade_de_ensino' => ['required', 'string', 'min:4'],
+            'enderecos' => ['required', 'array'],
+            'enderecos.rua' => ['nullable', 'string', 'max:255'],
+            'enderecos.cep' => ['nullable', 'string', 'max:10'],
+            'enderecos.numero_da_casa' => ['nullable', 'string', 'max:20'],
+            'enderecos.bairro' => ['nullable', 'string', 'max:255'],
+
         ];
     }
 
@@ -44,7 +50,9 @@ class AlunoPostRequest extends FormRequest
             'unidade_de_ensino.required' => 'O campo unidade de ensino deve ser obrigatorio',
             'unidade_de_ensino.min' => 'Unidade de ensino deve ter ao menos 4 caracteres',
             'RA.unique' => 'O Registro do Aluno deve ser unico!',
-            'email.unique' => 'O email deve ser unico'
+            'email.unique' => 'O email deve ser unico',
+            'enderecos.required' => 'O endereço é obrigatório',
+            'enderecos.rua.required' => 'O nome da rua do endereço é obrigatório',
 
         ];
     }

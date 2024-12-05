@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Aluno;
+use App\Models\Endereco;
+
+class EnderecoService{
+
+    private $endereco;
+
+    public function __construct(Endereco $endereco) {
+        $this->endereco = $endereco;
+    }
+
+    public function getAll()
+    {
+        return Endereco::all();
+    }
+
+    public function getById($id)
+    {
+        return Endereco::findOrFail($id);
+    }
+
+    public function createEndereco($data)
+{
+    return Endereco::create([
+        'rua' => $data['rua'],
+        'cep' => $data['cep'],
+        'numero_da_casa' => $data['numero_da_casa'],
+        'bairro' => $data['bairro'],
+    ]);
+}
+
+
+    public function delete($id)
+    {
+        return Endereco::where('id', $id)->delete();
+    }
+
+}

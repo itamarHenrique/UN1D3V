@@ -3,48 +3,69 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AlunoPostRequest;
+use App\Http\Requests\EnderecoPostRequest;
 use App\Http\Resources\AlunoResource;
 use App\Models\Aluno;
+use App\Models\Endereco;
 use App\Services\AlunoService;
+use App\Services\EnderecoService;
 use Illuminate\Http\Request;
 
 class AlunosController extends Controller
 {
+    private $alunoService;
+    private $enderecoService;
     private $aluno;
+    private $endereco;
 
-    public function __construct(AlunoService $alunoService)
+
+
+    public function __construct(AlunoService $alunoService, EnderecoService $enderecoService, Aluno $aluno, Endereco $endereco)
     {
-        $this->aluno = $alunoService;
+        $this->alunoService = $alunoService;
+        $this->enderecoService = $enderecoService;
+        $this->aluno = $aluno;
+        $this->endereco = $endereco;
     }
 
     public function index()
     {
-        $alunos = $this->aluno->getAll();
+        $alunos = $this->alunoService->getAll();
 
-        return $alunos;
+        return AlunoResource::collection($alunos);
     }
 
     public function getById($id)
     {
-        return $this->aluno->getById($id);
+        $aluno = $this->alunoService->getById($id);
+
+        return AlunoResource::collection($aluno);
     }
 
-    public function createAluno(AlunoPostRequest $request)
+    public function createAluno(AlunoPostRequest $request, EnderecoPostRequest $enderecoPostRequest)
     {
         $data = $request->validated();
 
-        $alunoCriado = $this->aluno->createAluno($data);
+        $dataEndereco = $data['enderecos'];
 
-        if(!$alunoCriado){
+        $aluno = $this->alunoService->createAluno($data);
+
+        if(!$aluno){
             return response()->json(['message' => 'Erro ao criar aluno!'], 400);
         }
 
-        return new AlunoResource($alunoCriado);
+        $endereco = $this->enderecoService->createEndereco($dataEndereco);
+
+        $aluno->enderecos()->attach($endereco->id);
+
+        $aluno->load('enderecos');
+
+        return new AlunoResource($aluno);
 
     }
 
     public function deleteAluno($id)
     {
-        return $this->aluno->deleteAluno($id);
+        return $this->alunoService->deleteAluno($id);
     }
 }
