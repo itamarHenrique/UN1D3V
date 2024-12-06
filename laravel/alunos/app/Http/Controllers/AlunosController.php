@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AlunoPostRequest;
+use App\Http\Requests\AlunoUpdateRequest;
 use App\Http\Requests\EnderecoPostRequest;
 use App\Http\Resources\AlunoResource;
 use App\Models\Aluno;
@@ -67,5 +68,10 @@ class AlunosController extends Controller
     public function deleteAluno($id)
     {
         return $this->alunoService->deleteAluno($id);
+    }
+
+    public function updateAluno(AlunoUpdateRequest $request)
+    {
+        $data = $request->validated();
     }
 }

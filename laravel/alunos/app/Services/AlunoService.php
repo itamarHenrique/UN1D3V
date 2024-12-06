@@ -42,4 +42,18 @@ class AlunoService
     {
         return Aluno::where('id', $id)->delete();
     }
+
+    public function updateAluno($data)
+    {
+        $endereco = isset($data['endereco']) ? $data['endereco'] : null;
+
+        return Aluno::updated([
+            'primeiro_nome' => $data['primeiro_nome'],
+            'sobrenome' => $data['sobrenome'],
+            'endereco' => $endereco,
+            'RA' => $data['RA'],
+            'email' => $data['email'],
+            'unidade_de_ensino' => $data['unidade_de_ensino']
+        ]);
+    }
 }

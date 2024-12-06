@@ -23,10 +23,10 @@ class EnderecoPostRequest extends FormRequest
 {
     return [
         'enderecos' => ['required', 'array'],
-        'enderecos.rua' => 'nullable|string',
-        'enderecos.cep' => 'nullable|string',
-        'enderecos.numero_da_casa' => 'nullable|string',
-        'enderecos.bairro' => 'nullable|string',
+        'enderecos.rua' => 'sometimes|string',
+        'enderecos.cep' => 'sometimes|string',
+        'enderecos.numero_da_casa' => 'sometimes|string',
+        'enderecos.bairro' => 'sometimes|string',
     ];
 }
 
