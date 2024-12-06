@@ -39,4 +39,27 @@ class EnderecoService{
         return Endereco::where('id', $id)->delete();
     }
 
+    public function updateEndereco($data)
+    {
+
+        if(!isset($data['id'])){
+            throw new \Exception('O ID do endereço é obrigatorio para atualização');
+        }
+
+        $endereco = Endereco::find($data['id']);
+
+        if (!$endereco) {
+            throw new \Exception('Endereço não encontrado.');
+        }
+
+        $endereco->update([
+            'rua' => $data['rua'],
+            'cep' => $data['cep'],
+            'numero_da_casa' => $data['numero_da_casa'],
+            'bairro' => $data['bairro'],
+        ]);
+
+        return $endereco;
+    }
+
 }

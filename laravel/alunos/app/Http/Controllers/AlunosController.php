@@ -70,8 +70,19 @@ class AlunosController extends Controller
         return $this->alunoService->deleteAluno($id);
     }
 
-    public function updateAluno(AlunoUpdateRequest $request)
+    public function updateAluno(AlunoUpdateRequest $request, $id)
     {
         $data = $request->validated();
+
+        $aluno = $this->alunoService->updateAluno($data, $id);
+
+        if(!$aluno){
+            return response()->json(['message' => 'Erro ao atualizar os dados do aluno!'], 400);
+        }
+
+        $aluno->load('enderecos');
+
+        return response()->json(new AlunoResource($aluno), 200);
+
     }
 }

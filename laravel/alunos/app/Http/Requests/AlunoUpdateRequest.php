@@ -20,21 +20,21 @@ class AlunoUpdateRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return [
-            'primeiro_nome' => ['sometimes', 'string', 'max:255', 'min:3'],
-            'sobrenome' => ['sometimes', 'string', 'max:255', 'min:3'],
-            'RA' => ['sometimes', 'string', 'max:255', 'min:7', 'unique:alunos,RA'],
-            'email' => ['sometimes', 'email', 'max:255', 'min:8', 'unique:alunos,email'],
-            'unidade_de_ensino' => ['sometimes', 'string', 'min:4'],
-            'enderecos' => ['sometimes', 'array'],
-            'enderecos.rua' => ['sometimes', 'string', 'max:255'],
-            'enderecos.cep' => ['sometimes', 'string', 'max:10'],
-            'enderecos.numero_da_casa' => ['sometimes', 'string', 'max:20'],
-            'enderecos.bairro' => ['sometimes', 'string', 'max:255'],
+{
+    return [
+        'primeiro_nome' => ['sometimes', 'string', 'max:255', 'min:3'],
+        'sobrenome' => ['sometimes', 'string', 'max:255', 'min:3'],
+        'RA' => ['sometimes', 'string', 'max:255', 'min:7'],
+        'email' => ['sometimes', 'email', 'max:255', 'min:8'],
+        'unidade_de_ensino' => ['sometimes', 'string', 'min:4'],
+        'enderecos' => ['nullable', 'array'],
+        'enderecos.rua' => ['required_with:enderecos', 'string'],
+        'enderecos.cep' => ['required_with:enderecos', 'string'],
+        'enderecos.numero_da_casa' => ['required_with:enderecos', 'integer'],
+        'enderecos.bairro' => ['required_with:enderecos', 'string'],
+    ];
+}
 
-        ];
-    }
 
     public function messages()
     {
