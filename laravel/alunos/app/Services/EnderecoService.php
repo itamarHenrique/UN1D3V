@@ -15,12 +15,12 @@ class EnderecoService{
 
     public function getAll()
     {
-        return Endereco::all();
+        return Endereco::with('alunos')->get();
     }
 
     public function getById($id)
     {
-        return Endereco::findOrFail($id);
+        return Endereco::with('alunos')->find($id);
     }
 
     public function createEndereco($data)
@@ -39,27 +39,23 @@ class EnderecoService{
         return Endereco::where('id', $id)->delete();
     }
 
-    public function updateEndereco($data)
+    public function updateEndereco($data, $id)
     {
-
-        if(!isset($data['id'])){
-            throw new \Exception('O ID do endereço é obrigatorio para atualização');
-        }
-
-        $endereco = Endereco::find($data['id']);
+        $endereco = Endereco::find($id);
 
         if (!$endereco) {
-            throw new \Exception('Endereço não encontrado.');
+            throw new \Exception('Endereço não encontrado');
         }
 
-        $endereco->update([
-            'rua' => $data['rua'],
-            'cep' => $data['cep'],
-            'numero_da_casa' => $data['numero_da_casa'],
-            'bairro' => $data['bairro'],
-        ]);
+        if (isset($data['enderecos'])) {
+            $data = $data['enderecos'];
+        }
+
+        $endereco->update($data);
 
         return $endereco;
     }
+
+
 
 }

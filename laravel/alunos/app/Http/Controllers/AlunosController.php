@@ -40,7 +40,12 @@ class AlunosController extends Controller
     {
         $aluno = $this->alunoService->getById($id);
 
-        return AlunoResource::collection($aluno);
+        return new AlunoResource($aluno);
+    }
+
+    public function deleteAluno($id)
+    {
+        return $this->alunoService->deleteAluno($id);
     }
 
     public function createAluno(AlunoPostRequest $request)
@@ -65,24 +70,25 @@ class AlunosController extends Controller
 
     }
 
-    public function deleteAluno($id)
-    {
-        return $this->alunoService->deleteAluno($id);
-    }
-
     public function updateAluno(AlunoUpdateRequest $request, $id)
-    {
-        $data = $request->validated();
+{
+    $data = $request->validated();
 
+    try{
         $aluno = $this->alunoService->updateAluno($data, $id);
 
-        if(!$aluno){
+        if (!$aluno) {
             return response()->json(['message' => 'Erro ao atualizar os dados do aluno!'], 400);
         }
 
-        $aluno->load('enderecos');
-
         return response()->json(new AlunoResource($aluno), 200);
 
+    }catch(\Exception $e){
+        return response()->json(['message' => $e->getMessage()], 400);
     }
+
+    return response()->json(new AlunoResource($aluno), 200);
+}
+
+
 }

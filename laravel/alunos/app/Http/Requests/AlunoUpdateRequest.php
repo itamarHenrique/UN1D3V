@@ -26,12 +26,7 @@ class AlunoUpdateRequest extends FormRequest
         'sobrenome' => ['sometimes', 'string', 'max:255', 'min:3'],
         'RA' => ['sometimes', 'string', 'max:255', 'min:7'],
         'email' => ['sometimes', 'email', 'max:255', 'min:8'],
-        'unidade_de_ensino' => ['sometimes', 'string', 'min:4'],
-        'enderecos' => ['nullable', 'array'],
-        'enderecos.rua' => ['required_with:enderecos', 'string'],
-        'enderecos.cep' => ['required_with:enderecos', 'string'],
-        'enderecos.numero_da_casa' => ['required_with:enderecos', 'integer'],
-        'enderecos.bairro' => ['required_with:enderecos', 'string'],
+        'unidade_de_ensino' => ['sometimes', 'string', 'min:4']
     ];
 }
 

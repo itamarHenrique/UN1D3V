@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlunosController;
+use App\Http\Controllers\EnderecoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,5 +17,11 @@ Route::prefix('alunos')->group(function(){
     Route::get('/{id}', [AlunosController::class, 'getById']);
     Route::post('/', [AlunosController::class, 'createAluno']);
     Route::delete('/{id}', [AlunosController::class, 'deleteAluno']);
-    Route::patch('/{id}', [AlunosController::class, 'updateAluno']);
+    Route::put('/{id}', [AlunosController::class, 'updateAluno']);
+});
+
+Route::prefix('endereco')->group(function(){
+    Route::get('/', [EnderecoController::class, 'index']);
+    Route::get('/{id}', [EnderecoController::class, 'getById']);
+    Route::put('/{id}', [EnderecoController::class, 'updateEndereco']);
 });

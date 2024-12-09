@@ -19,5 +19,4 @@ class Endereco extends Model
             ->withTimestamps();
     }
 
-
 }

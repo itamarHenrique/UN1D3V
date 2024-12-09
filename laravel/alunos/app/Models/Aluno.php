@@ -17,8 +17,7 @@ class Aluno extends Model
 
     public function enderecos()
 {
-    return $this->belongsToMany(Endereco::class, 'aluno_endereco', 'aluno_id', 'endereco_id')
-        ->withTimestamps();
+    return $this->belongsToMany(Endereco::class, 'aluno_endereco', 'aluno_id', 'endereco_id')->withTimestamps();
 }
 
 
