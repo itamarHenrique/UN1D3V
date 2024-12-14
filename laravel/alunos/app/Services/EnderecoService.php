@@ -16,6 +16,7 @@ class EnderecoService{
     public function getAll()
     {
         return Endereco::with('alunos')->get();
+
     }
 
     public function getById($id)

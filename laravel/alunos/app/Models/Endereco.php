@@ -13,10 +13,20 @@ class Endereco extends Model
 
     protected $endereco = 'enderecos';
 
+    protected $hidden = ['pivot', 'alunos'];
+
+    protected $appends = ['aluno'];
+
     public function alunos()
     {
         return $this->belongsToMany(Aluno::class, 'aluno_endereco', 'endereco_id', 'aluno_id')
             ->withTimestamps();
     }
+
+    public function getAlunoAttribute()
+    {
+        return $this->alunos;
+    }
+
 
 }

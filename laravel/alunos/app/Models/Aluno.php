@@ -15,9 +15,20 @@ class Aluno extends Model
 
     protected $aluno = 'alunos';
 
+    protected $hidden = ['pivot'];
+
+    protected $appends = ['nome completo'];
+
+
     public function enderecos()
 {
     return $this->belongsToMany(Endereco::class, 'aluno_endereco', 'aluno_id', 'endereco_id')->withTimestamps();
+}
+
+
+public function getNomeCompletoAttribute()
+{
+    return $this->primeiro_nome . ' ' . $this->sobrenome;
 }
 
 
