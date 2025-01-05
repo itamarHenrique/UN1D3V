@@ -7,8 +7,10 @@ use App\Http\Requests\AlunoUpdateRequest;
 use App\Http\Requests\EnderecoPostRequest;
 use App\Http\Resources\AlunoResource;
 use App\Models\Aluno;
+use App\Models\Curso;
 use App\Models\Endereco;
 use App\Services\AlunoService;
+use App\Services\CursoService;
 use App\Services\EnderecoService;
 use Illuminate\Http\Request;
 
@@ -18,15 +20,19 @@ class AlunosController extends Controller
     private $enderecoService;
     private $aluno;
     private $endereco;
+    private $curso;
+    private $cursoService;
 
 
 
-    public function __construct(AlunoService $alunoService, EnderecoService $enderecoService, Aluno $aluno, Endereco $endereco)
+    public function __construct(AlunoService $alunoService, EnderecoService $enderecoService, CursoService $cursoService, Aluno $aluno, Endereco $endereco, Curso $curso)
     {
         $this->alunoService = $alunoService;
         $this->enderecoService = $enderecoService;
         $this->aluno = $aluno;
         $this->endereco = $endereco;
+        $this->curso = $curso;
+        $this->cursoService = $cursoService;
     }
 
     public function index()
@@ -54,6 +60,8 @@ class AlunosController extends Controller
 
         $dataEndereco = $data['enderecos'];
 
+        $dataCurso = $data['curso'];
+
         $aluno = $this->alunoService->createAluno($data);
 
         if(!$aluno){
@@ -65,6 +73,12 @@ class AlunosController extends Controller
         $aluno->enderecos()->attach($endereco->id);
 
         $aluno->load('enderecos');
+
+        $curso = $this->cursoService->createCurso($dataCurso);
+
+        $aluno->cursos()->attach($curso->id);
+
+        $aluno->load('cursos');
 
         return new AlunoResource($aluno);
 

@@ -28,6 +28,12 @@ class AlunoResource extends JsonResource
                     'bairro' => $endereco->bairro
                 ];
             }),
+            'curso' => $this->cursos->map(function($curso) {
+                return [
+                'id' => $curso->id,
+                'nome do curso' => $curso->nome,
+                ];
+            }),
             'email' => $this->email,
             'RA' => $this->RA,
             'unidade_de_ensino' => $this->unidade_de_ensino

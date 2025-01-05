@@ -32,6 +32,8 @@ class AlunoPostRequest extends FormRequest
             'enderecos.cep' => ['nullable', 'string', 'max:10'],
             'enderecos.numero_da_casa' => ['nullable', 'string', 'max:20'],
             'enderecos.bairro' => ['nullable', 'string', 'max:255'],
+            'curso' => ['required', 'array'],
+            'curso.nome' => ['string', 'required']
 
         ];
     }

@@ -21,9 +21,14 @@ class Aluno extends Model
 
 
     public function enderecos()
-{
-    return $this->belongsToMany(Endereco::class, 'aluno_endereco', 'aluno_id', 'endereco_id')->withTimestamps();
-}
+    {
+        return $this->belongsToMany(Endereco::class, 'aluno_endereco', 'aluno_id', 'endereco_id')->withTimestamps();
+    }
+
+    public function cursos()
+    {
+        return $this->belongsToMany(Curso::class, 'aluno_curso', 'aluno_id', 'curso_id')->withTimestamps();
+    }
 
 
 public function getNomeCompletoAttribute()
