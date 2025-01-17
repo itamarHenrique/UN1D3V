@@ -22,16 +22,16 @@ class AlunoPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'primeiro_nome' => ['required', 'string', 'max:255', 'min:3'],
-            'sobrenome' => ['required', 'string', 'max:255', 'min:3'],
-            'RA' => ['required', 'string', 'max:255', 'min:7', 'unique:alunos,RA'],
-            'email' => ['required', 'email', 'max:255', 'min:8', 'unique:alunos,email'],
+            'primeiro_nome' => ['required', 'string', 'max:100', 'min:3'],
+            'sobrenome' => ['required', 'string', 'max:100', 'min:3'],
+            'RA' => ['required', 'string', 'max:40', 'min:7', 'unique:alunos,RA'],
+            'email' => ['required', 'email', 'max:244', 'min:8', 'unique:alunos,email'],
             'unidade_de_ensino' => ['required', 'string', 'min:4'],
             'enderecos' => ['required', 'array'],
-            'enderecos.rua' => ['nullable', 'string', 'max:255'],
+            'enderecos.rua' => ['nullable', 'string', 'max:244'],
             'enderecos.cep' => ['nullable', 'string', 'max:10'],
             'enderecos.numero_da_casa' => ['nullable', 'string', 'max:20'],
-            'enderecos.bairro' => ['nullable', 'string', 'max:255'],
+            'enderecos.bairro' => ['nullable', 'string', 'max:244'],
             'curso' => ['required', 'array'],
             'curso.nome' => ['string', 'required']
 

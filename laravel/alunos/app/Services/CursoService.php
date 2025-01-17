@@ -36,4 +36,9 @@ class CursoService
             'nome' => $data['nome']
         ]);
     }
+
+    public function deleteById($id)
+    {
+        return Curso::where('id', $id)->delete();
+    }
 }

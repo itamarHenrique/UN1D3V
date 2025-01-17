@@ -16,9 +16,9 @@ class AlunoResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nome_completo' => "{$this->primeiro_nome} {$this->sobrenome}",
             'primeiro_nome' => $this->primeiro_nome,
             'sobrenome' => $this->sobrenome,
+            'nome_completo' => "{$this->primeiro_nome} {$this->sobrenome}",
             'endereços' =>$this->enderecos->map(function($endereco) {
                 return [
                     'id' => $endereco->id,

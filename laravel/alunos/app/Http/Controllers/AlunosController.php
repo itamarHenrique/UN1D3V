@@ -100,8 +100,6 @@ class AlunosController extends Controller
     }catch(\Exception $e){
         return response()->json(['message' => $e->getMessage()], 400);
     }
-
-    return response()->json(new AlunoResource($aluno), 200);
 }
 
 
